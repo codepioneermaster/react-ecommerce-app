@@ -9,19 +9,20 @@ function router(app) {
     User.findAll({}).then(function(users) {
       response.render('users', {users});
     });
-
   });
 
-  // view specific user - ADMIN or USER viewing self
+  // view update form for specific user 
   app.get('/users/:id', function(request, response) {
     User.findOne({
       where: {
         id: request.params.id
       }
     }).then(function(user) {
-      response.render('user', {user});
+      response.render('user-update', {user});
     });
   });
+
+
 
   // create new user - might change once we figure out authentication 
   app.post('/users', function(request, response) {
