@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
-            primaryKey: true
+			primaryKey: true
 		},
 		firstName: {
 			type: DataTypes.STRING,
@@ -26,6 +26,6 @@ module.exports = function(sequelize, DataTypes) {
 			validate: {}
 		}
 	});
-	
+
 	return User;
 };
