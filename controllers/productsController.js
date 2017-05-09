@@ -6,11 +6,14 @@ function router(app) {
 
   // get all products
   app.get('/products', function(req, res) {
+    /*
     Product.findAll({
     
     }).then(function(products) {
       res.render('products', { products });
     });
+    */
+    res.render('products');
   });
 
   // create a product
