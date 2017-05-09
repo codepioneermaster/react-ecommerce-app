@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-	var User = sequelize.define("user", {
+	var User = sequelize.define("user",{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
@@ -24,6 +24,21 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {}
+		}
+	},
+	{
+		instanceMethods: {
+			validPassword: function(pwd) {
+				return bcrypt.compareSync(pwd, this.pwd);
+			}
+		},
+		hooks: {
+			beforeCreate: function(user, options, cb) {
+				user.pwd = bcrypt.hashSync(
+					user.pwd,
+					bcrypt.genSaltSync(10),null);
+				cb(null, options);
+			}
 		}
 	});
 
