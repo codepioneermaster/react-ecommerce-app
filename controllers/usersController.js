@@ -8,7 +8,6 @@ function router(app) {
   // view table of all users - ADMIN
   app.get('/users', function(request, response) {
     db.User.findAll({}).then(function(users) {
-      response.render('users', {users});
     });
   });
 
