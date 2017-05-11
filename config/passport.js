@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var googleOAuth = require('./auth.js').google;
+var OAuth = require('./auth.js');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require('../models');
 
@@ -16,10 +16,16 @@ function extractProfile(profile) {
   };
 }
 
-// passport.use(new GoogleStrategy(googleOAuth, function(accessToken, refreshToken, profile, cb) {
-//   cb(null, extractProfile(profile));
-// }));
-
+passport.use(new GoogleStrategy({
+    clientID: OAuth.googleAuth.clientID,
+    clientSecret: OAuth.googleAuth.clientSecret,
+    callbackURL: OAuth.googleAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    cb(null, extractProfile(profile));
+  }
+));
+  
 passport.use(new LocalStrategy ({
   usernameField: 'email',
   passwordField: 'pwd'
@@ -29,7 +35,6 @@ passport.use(new LocalStrategy ({
       email: email
     }
   }).then(function(dbUser) {
-    console.log(dbUser);
     if(!dbUser) {
       return done(null, false, {
         message: 'Invalid email'
