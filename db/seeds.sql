@@ -17,7 +17,7 @@ VALUES
 INSERT INTO `ecommerce`.`Users`
 (`firstName`,`lastName`,`email`,`pwd`)
 VALUES
-("Brad","Carlisle","brad@carlisle.com","bradspassword"),
-("Mike","Flight","mike@gmail.com","mikespassword"),
-("Jerry","Jepsen","jerry@jepsen.com","jerryspassword");
+("Brad","Carlisle","brad@carlisle.com","$2a$10$SRA8F2QC.Vnsx5N97whEi.nmT1Rz88Bg8rZdTtcegp4WywT9RHT6y"),
+("Mike","Flight","mike@gmail.com","$2a$10$QohRiClPJgBWWZjb1KLNx.vwrjVRmnlipSOo9nWNfTs9FrfBpp69y"),
+("Jerry","Jepsen","jerry@jepsen.com","$2a$10$W2K0vNA0i24cROeHvaqDeu84UZAJ9EJ87q//xA9.phrhKOyvsKnO6");
 
