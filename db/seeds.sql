@@ -14,5 +14,10 @@ VALUES
 ("Geezys",225.55,"http://","These Geezys are better than Yeezys",45,2),
 ("Socks",22.99,"http://","Socks so good they're socks",45,3);
 
-
+INSERT INTO `ecommerce`.`Users`
+(`firstName`,`lastName`,`email`,`pwd`)
+VALUES
+("Brad","Carlisle","brad@carlisle.com","bradspassword"),
+("Mike","Flight","mike@gmail.com","mikespassword"),
+("Jerry","Jepsen","jerry@jepsen.com","jerryspassword");
 
