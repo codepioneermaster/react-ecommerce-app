@@ -10,6 +10,13 @@ function router(app) {
     failureRedirect: '/'
   }));
 
+  app.get('/login', function(req, res){
+    if (req.user) {
+      res.redirect('/products');
+    } 
+    res.redirect('/users'); // TODO
+  });
+
 }
 
 module.exports = router;
