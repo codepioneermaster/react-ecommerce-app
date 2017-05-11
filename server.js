@@ -43,7 +43,7 @@ require('./controllers/usersController.js')(app);
 require('./controllers/productsController.js')(app);
  
 // start server
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
 	  console.log('App listentin on port ' + PORT);
 	});

@@ -17,9 +17,10 @@ function router(app) {
     res.render('login'); // TODO
   });
 
-  app.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log(req.user);
-  });
+  app.post('/login', passport.authenticate('local',{
+    successRedirect: '/products',
+    failureRedirect: '/login'
+  }));
 
 }
 

@@ -29,6 +29,7 @@ passport.use(new LocalStrategy ({
       email: email
     }
   }).then(function(dbUser) {
+    console.log(dbUser);
     if(!dbUser) {
       return done(null, false, {
         message: 'Invalid email'
