@@ -13,6 +13,8 @@ var passport = require('./config/passport.js');
 // set up port 
 var PORT = process.env.PORT || 8080;
 
+//require models for syncing
+var db = require('./models')
 // set up express to handle data parsing and HTTP requests
 var app = express();
 app.use('/public', express.static(path.join(__dirname, './public')));
@@ -43,7 +45,9 @@ require('./controllers/usersController.js')(app);
 require('./controllers/productsController.js')(app);
  
 // start server
-app.listen(PORT, function() {
-  console.log('App listening on port ' + PORT);
+db.sequelize.sync({ force: false }).then(function() {
+	app.listen(PORT, function() {
+    console.log('App listening on port ' + PORT);
+	});
 });
 

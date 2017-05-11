@@ -8,6 +8,18 @@ function router(app) {
     res.redirect('/');
   });
 
+  app.get('/login', function(req, res){
+    if (req.user) {
+      res.redirect('/products');
+    } 
+    res.render('login'); // TODO
+  });
+
+  app.post('/login', passport.authenticate('local',{
+    successRedirect: '/products',
+    failureRedirect: '/login'
+  }));
+
 }
 
 module.exports = router;

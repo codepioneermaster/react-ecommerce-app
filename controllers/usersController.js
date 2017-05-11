@@ -1,19 +1,20 @@
 // Import User Model
-var User = require('../models/user.js');
+var db = require("../models");
+
 
 // ROUTES  
 function router(app) {
 
   // view table of all users - ADMIN
   app.get('/users', function(request, response) {
-    User.findAll({}).then(function(users) {
+    db.User.findAll({}).then(function(users) {
       response.render('users', {users});
     });
   });
 
   // view update form for specific user 
   app.get('/users/:id', function(request, response) {
-    User.findOne({
+    db.User.findOne({
       where: {
         id: request.params.id
       }
@@ -26,7 +27,7 @@ function router(app) {
 
   // create new user - might change once we figure out authentication 
   app.post('/users', function(request, response) {
-    User.create({
+    db.User.create({
       admin: request.body.admin, 
       email: request.body.email,
       password: request.body.password
@@ -37,7 +38,7 @@ function router(app) {
 
   // update user information - might change once we figure out authentication 
   app.put('/users/:id', function(request, response) {
-    User.update({
+    db.User.update({
       email: request.body.email,
       password: request.body.password
     }, { 
@@ -51,7 +52,7 @@ function router(app) {
 
   // delete user 
   app.delete('/users/:id', function(request, response) {
-    User.destroy({
+    db.User.destroy({
       where: {
         id: request.params.id
       }

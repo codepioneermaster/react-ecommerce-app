@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cecolby11/ecommerce-app#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
@@ -27,6 +28,7 @@
     "mysql": "^2.13.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^3.30.4"
   },
   "devDependencies": {

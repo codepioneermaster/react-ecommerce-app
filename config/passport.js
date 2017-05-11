@@ -1,6 +1,8 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var OAuth = require('./auth.js');
+var LocalStrategy = require('passport-local').Strategy;
+var db = require('../models');
 
 function extractProfile(profile) { 
   var imageURL = '';
@@ -24,6 +26,28 @@ passport.use(new GoogleStrategy({
   }
 ));
   
+passport.use(new LocalStrategy ({
+  usernameField: 'email',
+  passwordField: 'pwd'
+}, function(email, pwd, done) {
+  db.User.findOne({
+    where: {
+      email: email
+    }
+  }).then(function(dbUser) {
+    if(!dbUser) {
+      return done(null, false, {
+        message: 'Invalid email'
+      });
+    } else if (!dbUser.validPassword(pwd)) {
+      return done(null, false, {
+        message: 'Incorrect password'
+      });
+    } 
+    return done(null, dbUser);
+  });
+}));
+
 passport.serializeUser(function(user, cb) { 
   cb(null, user);
 });

@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Product = sequelize.define("product",{
+    var Product = sequelize.define('Product',{
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -25,11 +25,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             validate: {}
         },
-        category: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {}
-        },
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -45,7 +40,8 @@ module.exports = function(sequelize, DataTypes) {
                         }
                     });
                 }
-            }
+            },
+            timestamps: false
         }
     );
 
