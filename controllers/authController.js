@@ -14,7 +14,11 @@ function router(app) {
     if (req.user) {
       res.redirect('/products');
     } 
-    res.redirect('/users'); // TODO
+    res.render('login'); // TODO
+  });
+
+  app.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log(req.user);
   });
 
 }

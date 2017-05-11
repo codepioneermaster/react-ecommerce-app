@@ -21,10 +21,9 @@ function extractProfile(profile) {
 // }));
 
 passport.use(new LocalStrategy ({
-  usernameField: email,
-  passwordField: pwd
-}, 
-function(email, pwd, done) {
+  usernameField: 'email',
+  passwordField: 'pwd'
+}, function(email, pwd, done) {
   db.User.findOne({
     where: {
       email: email
@@ -41,8 +40,7 @@ function(email, pwd, done) {
     } 
     return done(null, dbUser);
   });
-}
-));
+}));
 
 passport.serializeUser(function(user, cb) { 
   cb(null, user);
