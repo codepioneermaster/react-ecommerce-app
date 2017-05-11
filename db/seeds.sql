@@ -14,5 +14,10 @@ VALUES
 ("Geezys",225.55,"http://","These Geezys are better than Yeezys",45,2),
 ("Socks",22.99,"http://","Socks so good they're socks",45,3);
 
-
+INSERT INTO `ecommerce`.`Users`
+(`firstName`,`lastName`,`email`,`pwd`)
+VALUES
+("Brad","Carlisle","brad@carlisle.com","$2a$10$SRA8F2QC.Vnsx5N97whEi.nmT1Rz88Bg8rZdTtcegp4WywT9RHT6y"),
+("Mike","Flight","mike@gmail.com","$2a$10$QohRiClPJgBWWZjb1KLNx.vwrjVRmnlipSOo9nWNfTs9FrfBpp69y"),
+("Jerry","Jepsen","jerry@jepsen.com","$2a$10$W2K0vNA0i24cROeHvaqDeu84UZAJ9EJ87q//xA9.phrhKOyvsKnO6");
 
