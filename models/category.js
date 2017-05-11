@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 	var Category = sequelize.define(
-		"category",
+		"Category",
 		{
 			id: {
 				type: DataTypes.INTEGER,
@@ -23,7 +23,8 @@ module.exports = function(sequelize, DataTypes) {
 						}
 					);
 				}
-			}
+			},
+			timestamps: false
 		}
 	);
 

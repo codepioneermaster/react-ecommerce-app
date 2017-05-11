@@ -1,6 +1,6 @@
 var bcrypt = require('bcrypt');
 module.exports = function(sequelize, DataTypes) {
-	var User = sequelize.define('user',{
+	var User = sequelize.define('User',{
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
@@ -40,7 +40,9 @@ module.exports = function(sequelize, DataTypes) {
 					bcrypt.genSaltSync(10),null);
 				cb(null, options);
 			}
-		}
+		},
+		timestamps: false
+
 	});
 
 	return User;
