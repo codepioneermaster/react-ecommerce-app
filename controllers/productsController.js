@@ -1,5 +1,5 @@
 // import model
-// var Product = require('../models/product.js');
+var db = require('../models');
 
 // HTML routing
 function router(app) {
@@ -7,7 +7,7 @@ function router(app) {
   // get all products
   app.get('/products', function(req, res) {
     /*
-    Product.findAll({
+    db.Product.findAll({
     
     }).then(function(products) {
       res.render('products', { products });
@@ -18,7 +18,7 @@ function router(app) {
 
   // create a product
   app.post('/products', function(req, res) {
-    Product.create({
+    db.Product.create({
       //product attributes on creation
       productName: req.body.productName
     }).then(function() {
@@ -28,7 +28,7 @@ function router(app) {
 
   app.put('/products/:id', function(req, res) {
     let id = req.params.id;
-    Product.update({
+    db.Product.update({
       // product attributes to update
     }, {
       where: {
@@ -40,7 +40,7 @@ function router(app) {
   });
 
   app.delete('/products/:id', function(req, res) {
-    Product.destroy({
+    db.Product.destroy({
       where: {
         id: params.req.id
       }
