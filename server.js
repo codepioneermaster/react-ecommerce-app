@@ -35,6 +35,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // import routes for controllers
+require('./controllers/authController.js')(app);
 require('./controllers/indexController.js')(app);
 require('./controllers/usersController.js')(app);
 require('./controllers/productsController.js')(app);
