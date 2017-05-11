@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var googleOAuth = require('./auth.js').google;
+var OAuth = require('./auth.js');
 
 function extractProfile(profile) { 
   var imageURL = '';
@@ -14,9 +14,15 @@ function extractProfile(profile) {
   };
 }
 
-passport.use(new GoogleStrategy(googleOAuth, function(accessToken, refreshToken, profile, cb) {
-  cb(null, extractProfile(profile));
-}));
+passport.use(new GoogleStrategy({
+    clientID: OAuth.googleAuth.clientID,
+    clientSecret: OAuth.googleAuth.clientSecret,
+    callbackURL: OAuth.googleAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    cb(null, extractProfile(profile));
+  }
+));
   
 passport.serializeUser(function(user, cb) { 
   cb(null, user);
