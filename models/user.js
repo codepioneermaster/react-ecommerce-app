@@ -40,7 +40,9 @@ module.exports = function(sequelize, DataTypes) {
 					bcrypt.genSaltSync(10),null);
 				cb(null, options);
 			}
-		}
+		},
+		timestamps: false
+
 	});
 
 	return User;
