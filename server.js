@@ -9,6 +9,8 @@ var path = require('path');
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+//require models for syncing
+var db = require('./models')
 // set up express to handle data parsing and HTTP requests
 app.use('/public', express.static(path.join(__dirname, './public')));
 app.use(bodyParser.json());
@@ -31,7 +33,9 @@ require('./controllers/usersController.js')(app);
 require('./controllers/productsController.js')(app);
  
 // start server
-app.listen(PORT, function() {
-  console.log('App listentin on port ' + PORT);
+db.sequelize.sync({ force: true }).then(function() {
+	app.listen(PORT, function() {
+	  console.log('App listentin on port ' + PORT);
+	});
 });
 
