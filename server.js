@@ -5,6 +5,7 @@ var methodOverride = require('method-override');
 var exphbs = require('express-handlebars');
 var path = require('path');
 var session = require('express-session');
+var cookieParser = require('cookie-parser');
 
 // import passport configuration
 var passport = require('./config/passport.js');
@@ -20,6 +21,7 @@ app.use('/public', express.static(path.join(__dirname, './public')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 // set up express to use passport
@@ -45,7 +47,7 @@ require('./controllers/productsController.js')(app);
 // start server
 db.sequelize.sync({ force: false }).then(function() {
 	app.listen(PORT, function() {
-	  console.log('App listentin on port ' + PORT);
+    console.log('App listening on port ' + PORT);
 	});
 });
 
