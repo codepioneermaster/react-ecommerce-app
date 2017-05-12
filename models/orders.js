@@ -1,4 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
-	var Orders = sequelize.define('Orders',{});
+	var Orders = sequelize.define('Orders',{
+		
+	});
 	return Orders;
 }
