@@ -8,6 +8,7 @@ function router(app) {
   // view table of all users - ADMIN
   app.get('/users', function(request, response) {
     db.User.findAll({}).then(function(users) {
+      response.render('users', {users});
     });
   });
 
@@ -21,8 +22,6 @@ function router(app) {
       response.render('user-update', {user});
     });
   });
-
-
 
   // create new user - might change once we figure out authentication 
   app.post('/users', function(request, response) {
@@ -38,8 +37,9 @@ function router(app) {
   // update user information - might change once we figure out authentication 
   app.put('/users/:id', function(request, response) {
     db.User.update({
-      email: request.body.email,
-      password: request.body.password
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      email: request.body.email
     }, { 
       where : {
         id: request.params.id
