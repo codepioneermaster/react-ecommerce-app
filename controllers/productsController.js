@@ -11,7 +11,9 @@ function router(app) {
     
     }).then(function(products) {
       // res.render('products', { products: products });
-      res.json(products);push
+      res.json(products);
+      console.log(products);
+      
     });
   
 
