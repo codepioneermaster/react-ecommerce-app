@@ -1,1 +1,9 @@
 <p>This is the products page</p>
+{{#each products}}
+	<div>
+		<h3>{{this.name}}</h3>
+		<img src="{{img}}"/>
+		<p class="price">{{price}}</p>
+		<p class="description">{{description}}</p>
+	</div>
+{{/each}}

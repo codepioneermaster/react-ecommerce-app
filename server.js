@@ -14,7 +14,7 @@ var passport = require('./config/passport.js');
 var PORT = process.env.PORT || 8080;
 
 //require models for syncing
-var db = require('./models')
+var db = require('./models');
 // set up express to handle data parsing and HTTP requests
 var app = express();
 app.use('/public', express.static(path.join(__dirname, './public')));

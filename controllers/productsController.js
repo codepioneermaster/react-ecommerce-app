@@ -6,14 +6,17 @@ function router(app) {
 
   // get all products
   app.get('/products', function(req, res) {
-    /*
+    
     db.Product.findAll({
     
     }).then(function(products) {
-      res.render('products', { products });
+      // res.render('products', { products: products });
+      res.json(products);
+      console.log(products);
+      
     });
-    */
-    res.render('products');
+  
+
   });
 
   // create a product
@@ -27,7 +30,7 @@ function router(app) {
   });
 
   app.put('/products/:id', function(req, res) {
-    let id = req.params.id;
+    // let id = req.params.id;
     db.Product.update({
       // product attributes to update
     }, {
