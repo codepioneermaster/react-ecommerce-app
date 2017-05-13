@@ -46,16 +46,19 @@ function router(app) {
       });
   });
 
-   // create new category 
-  app.post('/category', function(request, response) {
-    db.Category.create({
-      name: request.body.name
-    }).then(function(result) {
-      response.send('created ' + request.body.name);
-    }).catch(function(err) {
+  // create new category
+  app.post("/category", function(request, response) {
+    db.Category
+      .create({
+        name: request.body.name
+      })
+      .then(function(result) {
+        response.send("created " + request.body.name);
+      })
+      .catch(function(err) {
         console.log(err.message);
-        response.send(err)
-    });
+        response.send(err);
+      });
   });
 }
 
