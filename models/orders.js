@@ -8,13 +8,13 @@ module.exports = function(sequelize, DataTypes) {
 		},
         {
             classMethods: {
-                associate: function(models) {
-                    Order.hasMany(models.Product, {
-                        // onDelete: "cascade"
-                    });
-                    Order.hasOne(models.User);
+                // associate: function(models) {
+                //     Order.hasMany(models.Product, {
+                //         // onDelete: "cascade"
+                //     });
+                //     Order.hasOne(models.User);
                     
-                }
+                // }
             },
             timestamps: false
         }
