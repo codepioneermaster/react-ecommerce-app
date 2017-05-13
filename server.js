@@ -45,6 +45,8 @@ require('./controllers/indexController.js')(app);
 require('./controllers/usersController.js')(app);
 require('./controllers/productsController.js')(app);
 require('./controllers/categoriesController.js')(app);
+require('./controllers/cartController.js')(app);
+require('./controllers/ordersController.js')(app);
 require('./controllers/temp.js')(app); //REMOVE for creating seed data
  
 // start server

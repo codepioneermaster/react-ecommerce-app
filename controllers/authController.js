@@ -37,6 +37,9 @@ function router(app) {
       lastName: req.body.lastName,
       email: req.body.email,
       pwd: req.body.pwd
+    },
+    {
+      fields: ['firstName', 'lastName', 'email', 'pwd']
     }).then(function(result) {
       res.redirect('/products');
     }).catch(function(err) {

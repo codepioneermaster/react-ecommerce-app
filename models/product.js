@@ -38,9 +38,12 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
-                    // Product.belongsToMany(Order, {
-                    //  through: 'ProductOrder'
-                    // });
+                    Product.hasMany(
+                        models.Cart,
+                        {
+                          //onDelete: "cascade"
+                        }
+                    );
                 }
             },
             //timestamps: false
