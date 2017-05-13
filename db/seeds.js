@@ -41,6 +41,14 @@ module.exports = {
 								desc: "Socks so good theyre socks",
 								quantity: 345,
 								CategoryId: 3
+							},
+							{
+								name: "Stuff",
+								price: 11,
+								img: "https://",
+								desc: "description",
+								quantity: 345,
+								CategoryId: 2
 							}
 						])
 						.then(function() {
