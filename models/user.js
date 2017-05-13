@@ -28,7 +28,8 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}, 
 		isAdmin: {
-			type: DataTypes.BOOLEAN
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
 		}
 	},
 	{

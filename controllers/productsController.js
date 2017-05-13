@@ -1,6 +1,5 @@
 // import model
 var db = require('../models');
-var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // HTML routing
 function router(app) {
@@ -14,12 +13,19 @@ function router(app) {
       res.render('products', { products });
 
       // res.json(products);
-      console.log(products);
       
     });
-  
-
   });
+
+  app.get('/products/:id', function(req, res) {
+    db.Product.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(product) {
+      res.render('products', {product});
+    })
+  })
 
   // create a product
   app.post('/products', function(req, res) {

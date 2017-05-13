@@ -1,7 +1,6 @@
 // Import User Model
 var db = require("../models");
 
-
 // ROUTES  
 function router(app) {
 
