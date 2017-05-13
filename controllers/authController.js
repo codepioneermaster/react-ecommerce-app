@@ -1,4 +1,5 @@
 var passport = require('passport');
+var db = require('../models/index.js');
 
 function router(app) {
 
@@ -19,6 +20,31 @@ function router(app) {
     successRedirect: '/products',
     failureRedirect: '/login'
   }));
+
+  app.get('/signup', function(req, res) {
+    if (req.user) {
+      res.redirect('/products');
+    }
+    res.render('signup');
+  });
+
+  app.post('/signup', function(req, res) {
+
+    console.log(req.body);
+    // create new User
+    db.User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      pwd: req.body.pwd
+    }).then(function(result) {
+      res.redirect('/products');
+    }).catch(function(err) {
+      console.log(err);
+      res.redirect('/signup');
+    });
+     
+  });
 
 }
 

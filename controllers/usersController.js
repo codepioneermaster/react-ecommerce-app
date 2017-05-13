@@ -20,6 +20,9 @@ function router(app) {
       }
     }).then(function(user) {
       response.render('user-update', {user});
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
     });
   });
 
@@ -32,6 +35,9 @@ function router(app) {
       pwd: request.body.password
     }).then(function(result) {
       response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 
@@ -46,7 +52,10 @@ function router(app) {
         id: request.params.id
       }
     }).then(function(result){
-      response.redirect('/users');
+        response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 
@@ -58,6 +67,9 @@ function router(app) {
       }
     }).then(function(result) {
       response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 }
