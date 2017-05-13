@@ -1,21 +1,66 @@
-// import model
-var db = require('../models');
+// Import User Model
+var db = require("../models");
 
-// HTML routing
+// ROUTES
 function router(app) {
-
-  // get all products
-  app.get('/categories', function(req, res) {
-    
-    db.Category.findAll({
-    
-    }).then(function(category) {
-      res.json(category);
-      console.log(category);
-      
+  // show all categories
+  app.get("/categories", function(request, response) {
+    db.Category.findAll({}).then(function(categories) {
+      response.json(categories);
     });
-  
-
   });
 
+  // show products by category name
+  app.get("/category/:categoryName/products", function(request, response) {
+    db.Category
+      .findAll({
+        where: {
+          name: request.params.categoryName
+        },
+        include: [db.Product]
+      })
+      .then(function(categoryProducts) {
+        response.json(categoryProducts);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
+
+  // show products by category id
+  app.get("/category/:id/products", function(request, response) {
+    db.Category
+      .findAll({
+        where: {
+          id: request.params.id
+        },
+        include: [db.Product]
+      })
+      .then(function(categoryProducts) {
+        response.json(categoryProducts);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
+
+  // create new category
+  app.post("/category", function(request, response) {
+    db.Category
+      .create({
+        name: request.body.name
+      })
+      .then(function(result) {
+        response.send("created " + request.body.name);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
 }
+
+module.exports = router;
+
