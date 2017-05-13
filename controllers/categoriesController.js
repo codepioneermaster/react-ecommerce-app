@@ -5,9 +5,10 @@ var db = require("../models");
 function router(app) {
   // show all categories
   app.get("/categories", function(request, response) {
-    db.Category.findAll({}).then(function(categories) {
-      response.json(categories);
-    });
+  	response.render('categories');
+    // db.Category.findAll({}).then(function(categories) {
+    //   response.json(categories);
+    // });
   });
 
   // show products by category name
@@ -63,3 +64,5 @@ function router(app) {
 }
 
 module.exports = router;
+
+
