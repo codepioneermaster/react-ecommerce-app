@@ -36,12 +36,8 @@ module.exports = function(sequelize, DataTypes) {
 		{
 			classMethods: {
 				associate: function(models) {
-					User.hasMany(
-						models.Cart,
-						{
-							//onDelete: "cascade"
-						}
-					);
+					User.hasMany(models.Cart);
+					User.hasMany(models.Order);
 				}
 			},
 

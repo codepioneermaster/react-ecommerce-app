@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-		var Order = sequelize.define('Orders',{
+		var Order = sequelize.define('Order',{
 			id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
@@ -54,13 +54,11 @@ module.exports = function(sequelize, DataTypes) {
 		},
         {
             classMethods: {
-                // associate: function(models) {
-                //     Order.hasMany(models.Product, {
-                //         // onDelete: "cascade"
-                //     });
-                //     Order.hasOne(models.User);
+                associate: function(models) {
+                    Order.belongsTo(models.Product);
+                    Order.belongsTo(models.User);
                     
-                // }
+                }
             },
             timestamps: false
         }

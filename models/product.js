@@ -38,12 +38,8 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
-                    Product.hasMany(
-                        models.Cart,
-                        {
-                          //onDelete: "cascade"
-                        }
-                    );
+                    Product.hasMany(models.Cart);
+                    Product.hasMany(models.Order);
                 }
             },
             //timestamps: false
