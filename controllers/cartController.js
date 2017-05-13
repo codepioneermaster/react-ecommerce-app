@@ -2,19 +2,14 @@ var db = require("../models");
 
 // ROUTES
 function router(app) {
-  // show all carts
-  app.get("/carts", function(request, response) {
-    db.Cart.findAll({}).then(function(carts) {
-      response.json(carts);
-    });
-  });
-
+   
   // show cart by user id
-  app.get("/cart/:id", function(request, response) {
+  app.get("/cart/", function(request, response) {
+    console.log(request.user);
     db.Cart
       .findAll({
         where: {
-          UserId: request.params.id
+          UserId: request.user.id
         },
         include: [db.Product]
       })

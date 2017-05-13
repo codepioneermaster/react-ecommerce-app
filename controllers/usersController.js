@@ -7,7 +7,7 @@ function router(app) {
   // view table of all users - ADMIN
   app.get('/users', function(request, response) {
     db.User.findAll({}).then(function(users) {
-      response.render('users', {users});
+      response.render('users', { users, userID: req.user.id });
     });
   });
 
@@ -18,7 +18,7 @@ function router(app) {
         id: request.params.id
       }
     }).then(function(user) {
-      response.render('user-update', {user});
+      response.render('user-update', { user, userID: req.user.id });
     }).catch(function(err) {
         console.log(err.message);
         response.send(err);

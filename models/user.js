@@ -53,9 +53,11 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		hooks: {
 			beforeCreate: function(user, options, cb) {
+        console.log('called');
 				user.pwd = bcrypt.hashSync(
 					user.pwd,
-					bcrypt.genSaltSync(10),null);
+					bcrypt.genSaltSync(10),
+          null);
 				cb(null, options);
 			}
 		}
