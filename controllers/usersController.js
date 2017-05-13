@@ -20,17 +20,24 @@ function router(app) {
       }
     }).then(function(user) {
       response.render('user-update', {user});
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
     });
   });
 
   // create new user - might change once we figure out authentication 
   app.post('/users', function(request, response) {
     db.User.create({
-      admin: request.body.admin, 
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
       email: request.body.email,
-      password: request.body.password
+      pwd: request.body.password
     }).then(function(result) {
       response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 
@@ -45,7 +52,10 @@ function router(app) {
         id: request.params.id
       }
     }).then(function(result){
-      response.redirect('/users');
+        response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 
@@ -57,6 +67,9 @@ function router(app) {
       }
     }).then(function(result) {
       response.redirect('/users');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err)
     });
   });
 }

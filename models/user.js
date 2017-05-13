@@ -2,11 +2,6 @@ var bcrypt = require('bcrypt');
  
 module.exports = function(sequelize, DataTypes) {
 	var User = sequelize.define('User',{
-		id: {
-			type: DataTypes.INTEGER,
-			autoIncrement: true,
-			primaryKey: true
-		},
 		firstName: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -20,12 +15,20 @@ module.exports = function(sequelize, DataTypes) {
 		email: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			validate: {}
+			unique: true,
+			validate: {
+				isEmail: true
+			}
 		},
 		pwd: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			validate: {}
+			validate: {
+				len: [5]
+			}
+		}, 
+		isAdmin: {
+			type: DataTypes.BOOLEAN
 		}
 	},
 	{
@@ -41,8 +44,8 @@ module.exports = function(sequelize, DataTypes) {
 					bcrypt.genSaltSync(10),null);
 				cb(null, options);
 			}
-		},
-		timestamps: false
+		}
+		//timestamps: false
 
 	});
 

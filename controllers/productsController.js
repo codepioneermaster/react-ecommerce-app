@@ -11,8 +11,9 @@ function router(app) {
     db.Product.findAll({
     
     }).then(function(products) {
-      // res.render('products', { products: products });
-      res.json(products);
+      res.render('products', { products });
+
+      // res.json(products);
       console.log(products);
       
     });
@@ -27,6 +28,9 @@ function router(app) {
       productName: req.body.productName
     }).then(function() {
       res.redirect('/products');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
     });
   });
 
@@ -40,6 +44,9 @@ function router(app) {
       }
     }).then(function() {
       res.redirect('/products/' + id);
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
     });
   });
 
@@ -50,6 +57,9 @@ function router(app) {
       }
     }).then(function() {
       res.redirect('/products');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
     });
   });
 
