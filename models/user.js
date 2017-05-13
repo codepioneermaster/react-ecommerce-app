@@ -32,6 +32,19 @@ module.exports = function(sequelize, DataTypes) {
 		}
 	},
 	{
+		classMethods: {
+				associate: function(models) {
+					User.hasMany(
+						models.Cart,
+						{
+						//onDelete: "cascade"
+						}
+					);
+				}
+			}
+	},
+
+	{
 		instanceMethods: {
 			validPassword: function(pwd) {
 				return bcrypt.compareSync(pwd, this.pwd);
