@@ -11,7 +11,7 @@ function router(app) {
   });
 
   // show products by category name
-  app.get("/category/:categoryName/products", function(request, response) {
+  app.get("/category/name/:categoryName/products", function(request, response) {
     db.Category
       .findAll({
         where: {
@@ -29,7 +29,7 @@ function router(app) {
   });
 
   // show products by category id
-  app.get("/category/:id/products", function(request, response) {
+  app.get("/category/id/:id/products", function(request, response) {
     db.Category
       .findAll({
         where: {
