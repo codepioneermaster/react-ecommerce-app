@@ -18,10 +18,10 @@ var db = require('./models');
 // set up express to handle data parsing and HTTP requests
 var app = express();
 app.use('/public', express.static(path.join(__dirname, './public')));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(methodOverride('_method'));
 
 // set up express to use passport

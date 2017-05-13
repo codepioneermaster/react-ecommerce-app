@@ -11,9 +11,9 @@ function router(app) {
 
   app.get('/login', function(req, res){
     if (req.user) {
-      res.redirect('/products');
+      return res.redirect('/products');
     } 
-    res.render('login'); // TODO
+    res.render('login');
   });
 
   app.post('/login', passport.authenticate('local',{
@@ -44,6 +44,12 @@ function router(app) {
       res.redirect('/signup');
     });
      
+  });
+
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/login");
   });
 
 }
