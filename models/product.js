@@ -38,9 +38,6 @@ module.exports = function(sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
-                    // Product.belongsToMany(Order, {
-                    //  through: 'ProductOrder'
-                    // });
                 }
             },
             //timestamps: false

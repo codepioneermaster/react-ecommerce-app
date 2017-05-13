@@ -25,12 +25,12 @@ function router(app) {
       })
       .catch(function(err) {
         console.log(err.message);
-        response.send(err);
+        //response.send(err);
       });
   });
 
   // show products by category id
-  app.get("/category/:id/products", function(request, response) {
+  app.get("/category/id/:id/products", function(request, response) {
     db.Category
       .findAll({
         where: {
@@ -43,7 +43,7 @@ function router(app) {
       })
       .catch(function(err) {
         console.log(err.message);
-        response.send(err);
+       // response.send(err);
       });
   });
 
