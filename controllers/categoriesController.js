@@ -4,14 +4,21 @@ var db = require('../models');
 // HTML routing
 function router(app) {
 
-  // get all products
-  app.get('/categories', function(req, res) {
+	app.get('/category', function(req, res) {
+    res.render('categories');
+  });
+
+  // get all products in category
+  app.get('/category/:category', function(req, res) {
     
-    db.Category.findAll({
-    
-    }).then(function(category) {
-      res.json(category);
-      console.log(category);
+    db.Category.findOne({
+    	where: {
+    		name: req.params.category
+    	},
+    	include: [db.Product]
+    }).then(function(dbCategory) {
+      res.json(dbCategory);
+      console.log(dbCategory);
       
     });
   
@@ -19,3 +26,5 @@ function router(app) {
   });
 
 }
+
+module.exports = router;

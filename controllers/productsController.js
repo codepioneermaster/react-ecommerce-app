@@ -10,8 +10,9 @@ function router(app) {
     db.Product.findAll({
     
     }).then(function(products) {
-      // res.render('products', { products: products });
-      res.json(products);
+      res.render('products', { products });
+
+      // res.json(products);
       console.log(products);
       
     });
