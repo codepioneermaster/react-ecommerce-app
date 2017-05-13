@@ -23,7 +23,7 @@ function router(app) {
         id: req.params.id
       }
     }).then(function(product) {
-      res.render('products', {product});
+      res.render('product', {product});
     })
   })
 
