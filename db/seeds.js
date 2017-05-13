@@ -64,7 +64,27 @@ module.exports = {
 									pwd: "$2a$10$W2K0vNA0i24cROeHvaqDeu84UZAJ9EJ87q//xA9.phrhKOyvsKnO6"
 								}
 							]);
-						});
+						})
+						.then(function() {
+							db.Cart.bulkCreate([
+								{
+									UserId: 1,
+									ProductId: 1
+								},
+								{
+									UserId: 2,
+									ProductId: 3
+								},
+								{
+									UserId: 3,
+									ProductId: 1
+								},
+								{
+									UserId: 3,
+									ProductId: 2
+								},
+							]);
+						})
 				});
 		});
 	}
