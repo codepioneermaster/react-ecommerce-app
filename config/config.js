@@ -9,11 +9,8 @@ module.exports = {
     dialect: 'mysql'
   },
   test: {
-    username: 'root',
-    password: '',
-    database: '',
-    host: '127.0.0.1',
-    dialect: 'mysql'
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
   },
   production: {
     username: 'root',

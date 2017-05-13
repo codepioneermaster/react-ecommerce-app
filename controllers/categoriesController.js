@@ -6,13 +6,14 @@ var db = require("../models");
 function router(app) {
   // show all categories
   app.get("/categories", function(request, response) {
-    db.Category.findAll({}).then(function(categories) {
-      response.json(categories);
-    });
+  	response.render('categories');
+    // db.Category.findAll({}).then(function(categories) {
+    //   response.json(categories);
+    // });
   });
 
   // show products by category name
-  app.get("/category/:categoryName/products", function(request, response) {
+  app.get("/category/name/:categoryName/products", function(request, response) {
     db.Category
       .findAll({
         where: {
@@ -64,3 +65,4 @@ function router(app) {
 }
 
 module.exports = router;
+
