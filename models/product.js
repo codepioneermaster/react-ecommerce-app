@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             validate: {}
         },
         price: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL,
             allowNull: false,
             validate: {}
         },
@@ -24,6 +24,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {}
+        },
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
     },
         {
@@ -36,7 +40,7 @@ module.exports = function(sequelize, DataTypes) {
                     });
                 }
             },
-            timestamps: false
+            //timestamps: false
         }
     );
 
