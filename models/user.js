@@ -26,6 +26,9 @@ module.exports = function(sequelize, DataTypes) {
 			validate: {
 				len: [5]
 			}
+		}, 
+		isAdmin: {
+			type: DataTypes.BOOLEAN
 		}
 	},
 	{
