@@ -7,7 +7,7 @@ var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 function router(app) {
 
   // get all products
-  app.get('/products', isAdmin, function(req, res) {
+  app.get('/products', function(req, res) {
     
     db.Product.findAll({
     
