@@ -8,11 +8,12 @@
         <div class="panel-body">
           <div class="list-group">
             {{#each categories}}
-            <form method="GET" action="/products/category/{{name}}">
-              <input type="hidden" name="categoryId" value="{{id}}"
+            <form method="post" action="/products/category/{{name}}">
+              <input type="hidden" name="categoryId" value="{{id}}">
               <button class="btn btn-default" type="submit" value="Submit">
               {{name}}
               </button>
+            </form>
             {{/each}}
          </div>
         </div>
