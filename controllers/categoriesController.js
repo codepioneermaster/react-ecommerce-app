@@ -12,6 +12,17 @@ function router(app) {
 
   // show products by category name
   app.get("/products/category/:categoryName", function(request, response) {
+    db.sequelize.Promise.all([
+      db.Product.findAll({
+        where: {
+          CategoryId: request.body.categoryId
+        }
+      }),
+      db.Category.findAll({})
+    ]).spread(function(products, categories) {
+      res.render('products', {products, categories, user: req.user});
+    });
+     
     db.Category
       .findAll({
         where: {
