@@ -12,7 +12,8 @@ function router(app) {
     db.Product.findAll({
     
     }).then(function(products) {
-      res.render('products', { products });
+      var user = req.user;
+      res.render('products', { products, user });
 
       // res.json(products);
       
@@ -25,7 +26,7 @@ function router(app) {
         id: req.params.id
       }
     }).then(function(product) {
-      res.render('product', { product });
+      res.render('product', { product, user });
     })
   })
 
