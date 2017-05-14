@@ -30,12 +30,20 @@ function router(app) {
 
   //create order from cart TODO
   app.post("/order/create/", function(request, response) {
-    db.Order.create({
+    db.Cart.create({
 
     }).then(function(orders) {
       response.json(orders);
     });
+
+    db.Cart.destroy({
+
+    }).then(function(orders) {
+      response.json(orders);
+    });
+    
   });
+
 }
 
 module.exports = router;
