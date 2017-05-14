@@ -8,9 +8,11 @@
         <div class="panel-body">
           <div class="list-group">
             {{#each categories}}
-            <a href="/products/category/{{name}}" class="list-group-item">
-             {{name}}
-            </a>
+            <form method="GET" action="/products/category/{{name}}">
+              <input type="hidden" name="categoryId" value="{{id}}"
+              <button class="btn btn-default" type="submit" value="Submit">
+              {{name}}
+              </button>
             {{/each}}
          </div>
         </div>
