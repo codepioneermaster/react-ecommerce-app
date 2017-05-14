@@ -45,7 +45,6 @@ module.exports = function(sequelize, DataTypes) {
 					);
 				}
 			},
-
 			instanceMethods: {
 				validPassword: function(pwd) {
 					return bcrypt.compareSync(pwd, this.pwd);
@@ -62,10 +61,10 @@ module.exports = function(sequelize, DataTypes) {
 				}
 			}
 		},
-		{
-			//timestamps: false
-		}
-	);
+    {
+      //timestamps: false
+    }
+  );
 
 	return User;
 };
