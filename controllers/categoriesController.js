@@ -11,29 +11,11 @@ function router(app) {
   });
 
   // show products by category name
-  app.get("/category/name/:categoryName", function(request, response) {
+  app.get("/products/category/:categoryName", function(request, response) {
     db.Category
       .findAll({
         where: {
           name: request.params.categoryName
-        },
-        include: [db.Product]
-      })
-      .then(function(categoryProducts) {
-        response.json(categoryProducts);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        response.send(err);
-      });
-  });
-
-  // show products by category id
-  app.get("/category/id/:id", function(request, response) {
-    db.Category
-      .findAll({
-        where: {
-          id: request.params.id
         },
         include: [db.Product]
       })

@@ -8,16 +8,17 @@ function router(app) {
 
   // get all products
   app.get('/products', function(req, res) {
-    
-    db.Product.findAll({
-    
-    }).then(function(products) {
-      var user = req.user;
-      res.render('products', { products, user });
-
-      // res.json(products);
-      
+    db.sequelize.Promise.all([
+      db.Product.findAll({}),
+      db.Category.findAll({})
+    ]).spread(function(products, categories) {
+      res.render('products', {products, categories, user: req.user});
     });
+    // db.Product.findAll({
+    
+    // }).then(function(products) {
+    //   res.render('products', { products, user: req.user}); 
+    // });
   });
 
   app.get('/products/:id', function(req, res) {
@@ -26,7 +27,7 @@ function router(app) {
         id: req.params.id
       }
     }).then(function(product) {
-      res.render('product', { product, user });
+      res.render('product', { product, user: req.user });
     })
   })
 
