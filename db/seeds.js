@@ -77,19 +77,24 @@ module.exports = {
 							db.Cart.bulkCreate([
 								{
 									UserId: 1,
-									ProductId: 1
+									ProductId: 1,
+									quantity: 2
 								},
 								{
 									UserId: 2,
-									ProductId: 3
+									ProductId: 3,
+									quantity: 1
 								},
 								{
 									UserId: 3,
-									ProductId: 1
+									ProductId: 1,
+									quantity: 1
+
 								},
 								{
 									UserId: 3,
-									ProductId: 2
+									ProductId: 2,
+									quantity: 4
 								},
 							]);
 						})
