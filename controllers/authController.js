@@ -30,7 +30,6 @@ function router(app) {
 
   app.post('/signup', function(req, res) {
 
-    console.log(req.body);
     // create new User
     db.User.create({
       firstName: req.body.firstName,
@@ -40,10 +39,13 @@ function router(app) {
     },
     {
       fields: ['firstName', 'lastName', 'email', 'pwd']
-    }).then(function(result) {
+    }).then(function(user) {
+      return req.login(user, function(err) {
+        if (err) { return next(err); }
+        res.redirect('/login');
+      })
       res.redirect('/products');
     }).catch(function(err) {
-      console.log(err);
       res.redirect('/signup');
     });
      

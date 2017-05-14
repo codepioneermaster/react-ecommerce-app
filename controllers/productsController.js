@@ -1,11 +1,13 @@
 // import model
 var db = require('../models');
+var isAdmin = require('../config/middleware/isAdmin.js');
+var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // HTML routing
 function router(app) {
 
   // get all products
-  app.get('/products', function(req, res) {
+  app.get('/products', isAdmin, function(req, res) {
     
     db.Product.findAll({
     

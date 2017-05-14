@@ -1,10 +1,11 @@
 var db = require("../models");
+var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
 function router(app) {
    
   // show cart by user id
-  app.get("/cart/", function(request, response) {
+  app.get("/cart/", isAuthenticated, function(request, response) {
     console.log(request.user);
     db.Cart
       .findAll({
@@ -23,7 +24,7 @@ function router(app) {
   });
 
   //update quantity
-   app.put("/cart/:userId/:itemId/:quantity", function(request, response) {
+   app.put("/cart/:userId/:itemId/:quantity", isAuthenticated, function(request, response) {
     db.Cart
       .update({quantity: request.params.quantity},{
         where: {
@@ -42,7 +43,7 @@ function router(app) {
   });
 
    //delete item from cart
-   app.delete('/cart/:userId/:itemId', function(request, response) {
+   app.delete('/cart/:userId/:itemId', isAuthenticated, function(request, response) {
     db.Cart.destroy({
       where: {
         UserId: request.params.userId,
