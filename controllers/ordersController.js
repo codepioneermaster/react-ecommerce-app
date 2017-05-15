@@ -10,57 +10,163 @@ function router(app) {
   });
 
   // show order by user id
- app.get("/orders/user/:id", function(request, response) {
-  db.Order
-    .findAll({
-      where: {
-        UserId: request.params.id
-      },
-      include: [db.Product]
-    })
-    .then(function(orderItems) {
-      response.json(orderItems);
-    })
-    .catch(function(err) {
-      console.log(err.message);
-      response.send(err);
-    });
+  app.get("/orders/user/:id", function(request, response) {
+    db.Order
+      .findAll({
+        where: {
+          UserId: request.params.id
+        },
+        include: [db.Product, db.Shipping, db.Billing]
+      })
+      .then(function(orderItems) {
+        response.json(orderItems);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
   });
 
-    // show order by order id
- app.get("/order/:id", function(request, response) {
-  db.Order
-    .findAll({
-      where: {
-        orderId: request.params.id
-      },
-      include: [db.Product]
-    })
-    .then(function(orderItems) {
-      response.json(orderItems);
-    })
-    .catch(function(err) {
-      console.log(err.message);
-      response.send(err);
-    });
+  // show order by order id
+  app.get("/order/:id", function(request, response) {
+    db.Order
+      .findAll({
+        where: {
+          orderId: request.params.id
+        },
+        include: [db.Product, db.Shipping, db.Billing]
+      })
+      .then(function(orderItems) {
+        response.json(orderItems);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
   });
 
   //create order from cart TODO
   app.post("/order/create/", function(request, response) {
-    db.Cart.create({
+    var orderNum;
+    var authenticatedUser = request.body.authenticatedUser
+    var ccLast4 = request.body.ccNum.slice(-4);
 
-    }).then(function(orders) {
-      response.json(orders);
+    console.log("AUTH USER" + authenticatedUser)
+
+    //Authorize CC
+    //If fails do something else here
+
+    //Need to check if cart has contents
+    //Need to handle total price
+
+    getNewOrderId(function(id) {
+      orderNum = id + 1;
+      createBillingShipping(orderNum, request, response);
     });
 
-    db.Cart.destroy({
+    /*
+Functions-------------------------------------
+*/
 
-    }).then(function(orders) {
-      response.json(orders);
-    });
-    
+    //Creates entries in billing and shipping tables
+    function createBillingShipping(orderNum, request) {
+      db.Billing
+        .create({
+          orderId: orderNum,
+          billingName: request.body.billingName,
+          billingAddress: request.body.billingAddress,
+          billingCity: request.body.billingCity,
+          billingState: request.body.billingState,
+          billingZip: request.body.billingZip,
+          billingCountry: request.body.billingCountry,
+          billingPhone: request.body.billingPhone
+        })
+        .then(function(result) {
+          db.Shipping
+            .create({
+              orderId: orderNum,
+              shippingName: request.body.shippingName,
+              shippingAddress: request.body.shippingAddress,
+              shippingCity: request.body.shippingCity,
+              shippingState: request.body.shippingState,
+              shippingZip: request.body.shippingZip,
+              shippingCountry: request.body.shippingCountry,
+              shippingPhone: request.body.shippingPhone
+            })
+            .then(function(result) {
+              console.log("The next operation is being called now");
+              getCartContents();
+            })
+            .catch(function(err) {
+              console.log(err.message);
+            });
+        })
+        .catch(function(err) {
+          console.log(err.message);
+        });
+    }
+
+    //gets new order id#
+    function getNewOrderId(cb) {
+      db.Order
+        .findAll({
+          order: [["orderId", "DESC"]],
+          limit: 1
+        })
+        .then(function(orderNumber) {
+          cb(orderNumber[0].dataValues.orderId);
+        });
+    }
+
+    //gets cart contents and creates order
+    function getCartContents() {
+      db.Cart
+        .findAll({
+          where: {
+            UserId: authenticatedUser
+          },
+          include: [db.Product]
+        })
+        .then(function(cartItems) {
+          for (var i = 0; i < cartItems.length; i++) {
+
+            db.Order
+              .create({
+                orderId: orderNum,
+                quantity: cartItems[i].quantity,
+                purchasePrice: cartItems[i].Product.price,
+                ccLast4: ccLast4, //DO THIS
+                BillingId: orderNum,
+                ProductId: cartItems[i].Product.id,
+                UserId: authenticatedUser, 
+                ShippingId: orderNum
+              })
+              .then(function(orders) {});
+          }
+          clearCartContents();
+        })
+        .catch(function(err) {
+          console.log(err.message);
+          // response.send(err);
+        });
+    }
+
+    function clearCartContents() {
+      db.Cart
+      .destroy({
+        where: {
+          userId: authenticatedUser 
+        }
+      })
+      .then(function(result) {
+        response.send("Done--Clearing Cart");
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+    }
   });
-
 }
 
 module.exports = router;

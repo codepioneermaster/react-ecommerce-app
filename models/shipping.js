@@ -25,17 +25,15 @@ module.exports = function(sequelize, DataTypes) {
       },
       shippingPhone: {
          type: DataTypes.STRING,
+      },
+      orderId: {
+        type: DataTypes.INTEGER
       }
 
 		},
         {
             classMethods: {
                 associate: function(models) {
-                    // Shipping.belongsTo(models.Order, {
-                    //     foreignKey: {
-                    //         allowNull: false
-                    //     }
-                    // });
                     Shipping.hasMany(models.Order);
                 }
             },

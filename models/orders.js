@@ -26,16 +26,18 @@ module.exports = function(sequelize, DataTypes) {
                 associate: function(models) {
                     Order.belongsTo(models.Product);
                     Order.belongsTo(models.User);
-                    // Order.hasMany(models.Shipping);
-                    // Order.hasMany(models.Billing);
+                    
                     Order.belongsTo(models.Billing, {
                         foreignKey: {
-                            allowNull: false
+                            allowNull: false,
+                            targetKey: 'orderId'
                         }
                     });
+
                     Order.belongsTo(models.Shipping, {
                         foreignKey: {
-                            allowNull: false
+                            allowNull: false,
+                            targetKey: 'orderId'
                         }
                     });
                 }

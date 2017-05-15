@@ -89,31 +89,32 @@ module.exports = {
 										quantity: 4
 									},
 								]);
+
 							}).then(function() {
 								db.Billing.bulkCreate([
 									{
+										orderId: 1,
 										billingName: "Fred Lewis",
 										billingAddress: "1735 N Wells St",
 										billingCity: "Chicago",
 										billingState: "IL",
 										billingZip: 60610,
 										billingCountry: "USA",
-										billingPhone: "7734904221",
-										OrderId: 1
+										billingPhone: "7734904221"
 									},
 									
 								]);
 							}).then(function() {
 								db.Shipping.bulkCreate([
 									{
+										orderId: 1,
 										shippingName: "Fred Lewis",
 										shippingAddress: "1735 N Wells St",
 										shippingCity: "Chicago",
 										shippingState: "IL",
 										shippingZip: 60610,
 										shippingCountry: "USA",
-										shippingPhone: "7734904221",
-										OrderId: 1
+										shippingPhone: "7734904221"
 									}
 											
 								]);
@@ -126,7 +127,7 @@ module.exports = {
 									ccLast4: 2344,
 									ProductId: 1,
 									BillingId: 1,
-									ShippingId: 1, 
+									ShippingId: 1,
 									UserId: 1
 									}
 											

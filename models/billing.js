@@ -31,11 +31,6 @@ module.exports = function(sequelize, DataTypes) {
         {
             classMethods: {
                 associate: function(models) {
-                   // Billing.belongsTo(models.Order, {
-                   //      foreignKey: {
-                   //          allowNull: false
-                   //      }
-                   //  });
                    Billing.hasMany(models.Order);
                 }
             },
