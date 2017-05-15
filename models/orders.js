@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       quantity: {
       	type: DataTypes.INTEGER
       },
-      price: {
+      purchasePrice: {
    		  type: DataTypes.DECIMAL(10,2),
         allowNull: false,
         validate: {}
@@ -26,8 +26,18 @@ module.exports = function(sequelize, DataTypes) {
                 associate: function(models) {
                     Order.belongsTo(models.Product);
                     Order.belongsTo(models.User);
-                    Order.belongsTo(models.Billing);
-                    Order.belongsTo(models.Shipping);
+                    // Order.hasMany(models.Shipping);
+                    // Order.hasMany(models.Billing);
+                    Order.belongsTo(models.Billing, {
+                        foreignKey: {
+                            allowNull: false
+                        }
+                    });
+                    Order.belongsTo(models.Shipping, {
+                        foreignKey: {
+                            allowNull: false
+                        }
+                    });
                 }
             },
             timestamps: false
