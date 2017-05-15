@@ -14,7 +14,8 @@ function router(app) {
         include: [db.Product]
       })
       .then(function(cartItems) {
-        response.json(cartItems);
+        response.render('cart', {cartItems, user: request.user});
+        // response.json(cartItems);
       })
       .catch(function(err) {
         console.log(err.message);
@@ -29,7 +30,8 @@ function router(app) {
       ProductId: request.params.itemId,
       quantity: request.body.quantity, // TODO 
     }).then(function(addedItem) {
-      response.json(addedItem);
+      // response.json(addedItem);
+      response.redirect('/products');
     }).catch(function(err) {
         console.log(err.message);
         response.send(err);
@@ -48,7 +50,8 @@ function router(app) {
         include: [db.Product]
       })
       .then(function(cartItems) {
-        response.json(cartItems);
+        // response.json(cartItems);
+        response.redirect('/cart');
       })
       .catch(function(err) {
         console.log(err.message);
@@ -57,14 +60,15 @@ function router(app) {
   });
 
    //delete item from cart
-   app.delete('/cart/:userId/:itemId', isAuthenticated, function(request, response) {
+   app.delete('/cart/:itemId', isAuthenticated, function(request, response) {
     db.Cart.destroy({
       where: {
-        UserId: request.params.userId,
-        ProductId: request.params.itemId
+        UserId: request.user.id,
+        ProductId: request.params.itemId,
+        quantity: request.body.quantity // bc there can be multiple cart instances of same item with different qs 
       }
     }).then(function() {
-      response.redirect('/carts');
+      response.redirect('/cart');
     }).catch(function(err) {
         console.log(err.message);
         response.send(err);
