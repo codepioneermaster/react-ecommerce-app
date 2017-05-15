@@ -65,8 +65,7 @@ module.exports = {
 										pwd: "$2a$10$W2K0vNA0i24cROeHvaqDeu84UZAJ9EJ87q//xA9.phrhKOyvsKnO6"
 									}
 								]);
-							})
-							.then(function() {
+							}).then(function() {
 								db.Cart.bulkCreate([
 									{
 										UserId: 1,
@@ -116,9 +115,23 @@ module.exports = {
 										shippingPhone: "7734904221",
 										OrderId: 1
 									}
-									
+											
 								]);
-							})
+							}).then(function() {
+								db.Order.bulkCreate([
+									{
+									orderId: 1,
+									quantity: 2,
+									purchasePrice: 2.99,
+									ccLast4: 2344,
+									ProductId: 1,
+									BillingId: 1,
+									ShippingId: 1, 
+									UserId: 1
+									}
+											
+								]);
+							});	
 					});
 			});
 		
