@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,5 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "sequelize": "^3.30.4"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
   }
 }

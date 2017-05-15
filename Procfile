@@ -1,1 +1,1 @@
-web: nodemon server.js heroku
+web: node server.js heroku
