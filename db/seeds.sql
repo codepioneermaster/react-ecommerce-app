@@ -13,6 +13,7 @@ VALUES
 ("Great Shirt",34.55,"http://","This shirt is faboulous",145,1),
 ("Geezys",225.55,"http://","These Geezys are better than Yeezys",45,2),
 ("Socks",22.99,"http://","Socks so good they're socks",45,3);
+("Stuff", 1.00, "http://", "Some description", 100, 2);
 
 INSERT INTO `ecommerce`.`Users`
 (`firstName`,`lastName`,`email`,`pwd`)

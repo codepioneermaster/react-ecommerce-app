@@ -1,25 +1,21 @@
 var db = require("../models");
+var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
 function router(app) {
-  // show all carts
-  app.get("/carts", function(request, response) {
-    db.Cart.findAll({}).then(function(carts) {
-      response.json(carts);
-    });
-  });
-
+   
   // show cart by user id
-  app.get("/cart/:id", function(request, response) {
+  app.get("/cart", isAuthenticated, function(request, response) {
     db.Cart
       .findAll({
         where: {
-          UserId: request.params.id
+          UserId: request.user.id
         },
         include: [db.Product]
       })
       .then(function(cartItems) {
-        response.json(cartItems);
+        response.render('cart', {cartItems, user: request.user});
+        // response.json(cartItems);
       })
       .catch(function(err) {
         console.log(err.message);
@@ -27,18 +23,35 @@ function router(app) {
       });
   });
 
+  // add new item to cart
+  app.post("/cart/:itemId", isAuthenticated, function(request, response) {
+    db.Cart.create({
+      UserId: request.user.id,
+      ProductId: request.params.itemId,
+      quantity: request.body.quantity, // TODO 
+    }).then(function(addedItem) {
+      // response.json(addedItem);
+      response.redirect('/products');
+    }).catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+
+  });
+
   //update quantity
-   app.put("/cart/:userId/:itemId/:quantity", function(request, response) {
+   app.put("/cart/:itemId", isAuthenticated, function(request, response) {
     db.Cart
-      .update({quantity: request.params.quantity},{
+      .update({quantity: request.body.quantity},{
         where: {
-          UserId: request.params.userId,
+          UserId: request.user.id,
           ProductId: request.params.itemId
         },
         include: [db.Product]
       })
       .then(function(cartItems) {
-        response.json(cartItems);
+        // response.json(cartItems);
+        response.redirect('/cart');
       })
       .catch(function(err) {
         console.log(err.message);
@@ -47,14 +60,15 @@ function router(app) {
   });
 
    //delete item from cart
-   app.delete('/cart/:userId/:itemId', function(request, response) {
+   app.delete('/cart/:itemId', isAuthenticated, function(request, response) {
     db.Cart.destroy({
       where: {
-        UserId: request.params.userId,
-        ProductId: request.params.itemId
+        UserId: request.user.id,
+        ProductId: request.params.itemId,
+        quantity: request.body.quantity // bc there can be multiple cart instances of same item with different qs 
       }
     }).then(function() {
-      response.redirect('/carts');
+      response.redirect('/cart');
     }).catch(function(err) {
         console.log(err.message);
         response.send(err);

@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
 				}
 			},
 			isAdmin: {
-				type: DataTypes.BOOLEAN
+				type: DataTypes.BOOLEAN,
+				defaultValue: false
 			}
 		},
 		{
@@ -40,7 +41,6 @@ module.exports = function(sequelize, DataTypes) {
 					User.hasMany(models.Order);
 				}
 			},
-
 			instanceMethods: {
 				validPassword: function(pwd) {
 					return bcrypt.compareSync(pwd, this.pwd);
@@ -57,10 +57,10 @@ module.exports = function(sequelize, DataTypes) {
 				}
 			}
 		},
-		{
-			//timestamps: false
-		}
-	);
+    {
+      //timestamps: false
+    }
+  );
 
 	return User;
 };

@@ -2,6 +2,7 @@ var db = require("../models");
 
 module.exports = {
 	createSeedData: function() {
+<<<<<<< HEAD
 		// db.sequelize.dropAllTables
 			db.sequelize.sync({ force: true }).then(function() {
 				db.Category
