@@ -35,7 +35,7 @@ function router(app) {
 //create order from cart TODO
   app.post("/order/", function(request, response) {
     var orderNum;
-    var authenticatedUser = request.body.authenticatedUser
+    var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
 
     console.log("AUTH USER" + authenticatedUser)
