@@ -38,3 +38,4 @@ jspm_packages
 
 # mysql local password
 mysql-password.js
+stripe-key.js
