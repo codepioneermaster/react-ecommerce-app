@@ -1,4 +1,5 @@
 var db = require("../models");
+var stripe = require('../config/stripe.js');
 var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
@@ -32,19 +33,44 @@ function router(app) {
     res.render('order', { user: req.user });
   });
    
-//create order from cart TODO
+//create order from cart
   app.post("/order/", function(request, response) {
     var orderNum;
     var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
-
-    console.log("AUTH USER" + authenticatedUser)
-
-    //Authorize CC
-    //If fails do something else here
-
-    //Need to check if cart has contents
-    //Need to handle total price
+    
+    // TODO check if cart has contents - query database 
+    
+    // TODO Need to handle total price - query database for prices of every item in cart & sum up
+    
+    // Authorize CC
+    var stripeToken = stripe.tokens.create({
+      card: {
+        "number": '4242424242424242',
+        "exp_month": 12,
+        "exp_year": 2018,
+        "cvc": '123'
+      }
+    }, function(err, token) {
+      if (err) {
+        console.log(err);
+        // asynchronously called
+      } else {
+        stripe.charges.create({
+            amount: 1000,
+            currency: "usd",
+            description: "Example charge",
+            source: token.id,
+        }, function(err, charge) {
+          if(err){
+            console.log(err);
+          } else {
+            console.log(charge);
+          }
+        });
+      }
+    });
+    //TODO If fails do something else here - what happens in the charge responseif it fails? 
 
     getNewOrderId(function(id) {
       orderNum = id + 1;
