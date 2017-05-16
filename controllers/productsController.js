@@ -12,6 +12,7 @@ function router(app) {
       db.Product.findAll({}),
       db.Category.findAll({})
     ]).spread(function(products, categories) {
+      //res.json(products);
       res.render('products', {products, categories, user: req.user});
     });
     // db.Product.findAll({

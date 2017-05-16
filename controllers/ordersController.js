@@ -32,6 +32,22 @@ function router(app) {
   app.get("/order/", function(req, res) {
     res.render('order', { user: req.user });
   });
+
+  app.get("/api/order/:id", function(request, response) {
+    db.Order
+      .findAll({
+        where: {
+          orderId: request.params.id
+        }
+      })
+      .then(function(orders) {
+        response.json(orders);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
    
 //create order from cart
   app.post("/order/", function(request, response) {
