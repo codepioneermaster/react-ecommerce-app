@@ -1,4 +1,4 @@
-var pwd = require('./mysql-password.js');
+// var pwd = require('./mysql-password.js');
 
 module.exports = {
   development: {
