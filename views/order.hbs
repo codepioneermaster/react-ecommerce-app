@@ -1,0 +1,46 @@
+{{> navbar this }}
+<div class="container">
+  <div class="row">
+  <h1>Review Order</h1>
+    <div class="col-md-6">
+      
+      <h2> Order Number #: {{orders.0.orderId}}</h2>
+      {{#each orders}}
+      <h3>{{Product.name}}</h3>
+      <p>Quantity: {{quantity}}<br>
+      Price: {{purchasePrice}}</p>
+      {{/each}}
+      <p>Total Cost: <span class="total"></span></p>
+    </div>
+    <div class="col-md-6">
+      <h2>Shipping Address</h2>
+      <h3>{{orders.0.Shipping.shippingName}}</h3>
+      
+      <p>{{orders.0.Shipping.shippingAddress}}<br/>
+        {{orders.0.Shipping.shippingCity}}, {{orders.0.Shipping.shippingState}} {{orders.0.Shipping.shippingZip}} <br/>
+        {{orders.0.Shipping.shippingCountry}} <br/>
+      Phone: {{orders.0.Shipping.shippingPhone}} </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+  $.get("../api/order/" + {{orders.0.orderId}}, function(data){
+    console.log(data);
+    var total = 0;
+    for (i=0; i < data.length; i++){
+      total += data[i].quantity * data[i].purchasePrice;
+      console.log (total);
+    }
+
+    $('.total').text(total);
+  });
+</script>
+{{> footer }}
