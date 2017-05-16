@@ -38,3 +38,6 @@ jspm_packages
 
 # mysql local password
 mysql-password.js
+
+# stripe api key
+stripe-key.js

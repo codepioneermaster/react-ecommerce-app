@@ -1,4 +1,5 @@
 var db = require("../models");
+var stripe = require('../config/stripe.js');
 var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
@@ -38,7 +39,35 @@ function router(app) {
     var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
 
-    console.log("AUTH USER" + authenticatedUser)
+    console.log("AUTH USER" + authenticatedUser);
+
+    var stripeToken = stripe.tokens.create({
+      card: {
+        "number": '4242424242424242',
+        "exp_month": 12,
+        "exp_year": 2018,
+        "cvc": '123'
+      }
+    }, function(err, token) {
+      if (err) {
+        console.log(err);
+        // asynchronously called
+      } else {
+        console.log(token);
+      }
+      stripe.charges.create({
+          amount: 1000,
+          currency: "usd",
+          description: "Example charge",
+          source: token.id,
+      }, function(err, charge) {
+        if(err){
+          console.log(err);
+        } else {
+          console.log(charge);
+        }
+      });
+    });
 
     //Authorize CC
     //If fails do something else here
