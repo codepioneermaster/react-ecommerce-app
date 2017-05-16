@@ -28,26 +28,12 @@ function router(app) {
       });
   });
 
-  // show order by order id
-  app.get("/order/:id", function(request, response) {
-    db.Order
-      .findAll({
-        where: {
-          orderId: request.params.id
-        },
-        include: [db.Product, db.Shipping, db.Billing]
-      })
-      .then(function(orderItems) {
-        response.json(orderItems);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        response.send(err);
-      });
+  app.get("/order/", function(req, res) {
+    res.render('order', { user: req.user });
   });
-
-  //create order from cart TODO
-  app.post("/order/create/", function(request, response) {
+   
+//create order from cart TODO
+  app.post("/order/", function(request, response) {
     var orderNum;
     var authenticatedUser = request.body.authenticatedUser
     var ccLast4 = request.body.ccNum.slice(-4);
@@ -168,6 +154,24 @@ Functions-------------------------------------
       });
     }
   });
+  // show order by order id
+  app.get("/order/:id", function(request, response) {
+    db.Order
+      .findAll({
+        where: {
+          orderId: request.params.id
+        },
+        include: [db.Product, db.Shipping, db.Billing]
+      })
+      .then(function(orderItems) {
+        response.json(orderItems);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
+
 }
 
 module.exports = router;
