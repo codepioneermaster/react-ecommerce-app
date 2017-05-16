@@ -22,7 +22,7 @@ module.exports = {
 								{
 									name: "Great Shirt",
 									price: 34.55,
-									img: "https://",
+									img: "https://images-na.ssl-images-amazon.com/images/I/91owLk7WdCL._UY879_.jpg",
 									desc: "This shirt is faboulous",
 									quantity: 145,
 									CategoryId: 1
@@ -30,7 +30,7 @@ module.exports = {
 								{
 									name: "Geezys",
 									price: 225.55,
-									img: "https://",
+									img: "https://images-na.ssl-images-amazon.com/images/I/61YWxenshTL._UY695_.jpg",
 									desc: "These Geezys are better than Yeezys",
 									quantity: 45,
 									CategoryId: 2
@@ -38,7 +38,7 @@ module.exports = {
 								{
 									name: "Socks",
 									price: 22.99,
-									img: "https://",
+									img: "https://images-na.ssl-images-amazon.com/images/I/71-SnpC8e8L._UX679_.jpg",
 									desc: "Socks so good theyre socks",
 									quantity: 345,
 									CategoryId: 3
