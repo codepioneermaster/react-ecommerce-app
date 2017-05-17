@@ -54,39 +54,6 @@ function router(app) {
     var orderNum;
     var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
-    
-    // TODO check if cart has contents - query database 
-    
-    // TODO Need to handle total price - query database for prices of every item in cart & sum up
-    
-    // Authorize CC
-    var stripeToken = stripe.tokens.create({
-      card: {
-        "number": '4242424242424242',
-        "exp_month": 12,
-        "exp_year": 2018,
-        "cvc": '123'
-      }
-    }, function(err, token) {
-      if (err) {
-        console.log(err);
-        // asynchronously called
-      } else {
-        stripe.charges.create({
-            amount: 1000,
-            currency: "usd",
-            description: "Example charge",
-            source: token.id,
-        }, function(err, charge) {
-          if(err){
-            console.log(err);
-          } else {
-            console.log(charge);
-          }
-        });
-      }
-    });
-    //TODO If fails do something else here - what happens in the charge response if it fails? 
 
     getNewOrderId(function(id) {
       orderNum = id + 1;
@@ -157,22 +124,30 @@ Functions-------------------------------------
           include: [db.Product]
         })
         .then(function(cartItems) {
-          for (var i = 0; i < cartItems.length; i++) {
+        	//if there is something in the users shopping cart
+        	if (cartItems.length > 0) {
+            //create order from cart items  	
+	          for (var i = 0; i < cartItems.length; i++) {
 
-            db.Order
-              .create({
-                orderId: orderNum,
-                quantity: cartItems[i].quantity,
-                purchasePrice: cartItems[i].Product.price,
-                ccLast4: ccLast4, //DO THIS
-                BillingId: orderNum,
-                ProductId: cartItems[i].Product.id,
-                UserId: authenticatedUser, 
-                ShippingId: orderNum
-              })
-              .then(function(orders) {});
+	            db.Order
+	              .create({
+	                orderId: orderNum,
+	                quantity: cartItems[i].quantity,
+	                purchasePrice: cartItems[i].Product.price,
+	                ccLast4: ccLast4, 
+	                BillingId: orderNum,
+	                ProductId: cartItems[i].Product.id,
+	                UserId: authenticatedUser, 
+	                ShippingId: orderNum
+	              })
+	              .then(function(orders) {});
+	          }
+	          //place the order through Stripe
+	          placeOrder(cartItems);
+	          //clear the items from the cart
+          	clearCartContents();
+
           }
-          clearCartContents();
         })
         .catch(function(err) {
           console.log(err.message);
@@ -194,6 +169,48 @@ Functions-------------------------------------
         console.log(err.message);
         response.send(err);
       });
+    }
+
+    function placeOrder(data){
+    	var total = 0;
+	    
+	    // calculate total cost of cart items
+	    for (i=0; i < data.length; i++){
+	      total += data[i].quantity * data[i].Product.price;
+	      console.log ("Total is" + total);
+	      console.log("quantity " + data[i].quantity);
+	      console.log("price " + data[i].Product.price);
+	    }
+
+	    
+	    // Authorize CC
+	    var stripeToken = stripe.tokens.create({
+	      card: {
+	        "number": '4242424242424242',
+	        "exp_month": 12,
+	        "exp_year": 2018,
+	        "cvc": '123'
+	      }
+	    }, function(err, token) {
+	      if (err) {
+	        console.log(err);
+	        // asynchronously called
+	      } else {
+	        stripe.charges.create({
+	            amount: (total*100).toFixed(0), //in lowest currency unit
+	            currency: "usd",
+	            description: "Example charge",
+	            source: token.id,
+	        }, function(err, charge) {
+	          if(err){
+	            console.log(err);
+	          } else {
+	            console.log(charge);
+	          }
+	        });
+	      }
+	    });
+	    //TODO If fails do something else here - what happens in the charge response if it fails? 
     }
   });
   // show order by order id
