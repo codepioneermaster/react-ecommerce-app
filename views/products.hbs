@@ -20,8 +20,9 @@
     </div>
 
     <div class="col-md-9">
+    {{#grouped_each 3 products}}
       <div class="row">
-        {{#each products}}
+        {{#each this}}
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
             <img src="{{img}}">
@@ -45,7 +46,10 @@
         </div>
         {{/each}}
       </div>
+    {{/grouped_each}}
     </div>
   </div>
   
 </div>
+
+
