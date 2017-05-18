@@ -4,19 +4,13 @@ var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
 function router(app) {
-  // show all orders
-  app.get("/orders", isAuthenticated, function(request, response) {
-    db.Cart.findAll({}).then(function(orders) {
-      response.json(orders);
-    });
-  });
 
-  // show order by user id
-  app.get("/orders/user/:id", isAuthenticated, function(request, response) {
+  // show all orders for current user
+  app.get("/orders", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
         where: {
-          UserId: request.params.id
+          UserId: request.user.id
         },
         include: [db.Product, db.Shipping, db.Billing]
       })
@@ -146,7 +140,7 @@ Functions-------------------------------------
       })
       .then(function(result) {
         // response.send("Done--Clearing Cart");
-        response.render('success', {user: req.user});
+        response.render('success', {user: request.user});
       })
       .catch(function(err) {
         console.log(err.message);
@@ -188,7 +182,7 @@ Functions-------------------------------------
 	        }, function(err, charge) {
 	          if(err){
 	            console.log(err);
-              response.render('fail', {user: req.user});
+              response.render('fail', {user: request.user});
 	          } else {
 	            console.log(charge);
               // clear the items from the cart
