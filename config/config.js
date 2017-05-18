@@ -1,4 +1,8 @@
-var pwd = require('./mysql-password.js');
+if (process.argv[2] != "heroku") {
+  var pwd = require('./mysql-password.js');
+} else{
+  var pwd = ""
+}
 
 module.exports = {
   development: {

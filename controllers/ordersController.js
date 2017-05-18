@@ -12,7 +12,7 @@ function router(app) {
   });
 
   // show order by user id
-  app.get("/orders/user/:id", function(request, response) {
+  app.get("/orders/user/:id", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
         where: {
@@ -29,28 +29,12 @@ function router(app) {
       });
   });
 
-  app.get("/order/", function(req, res) {
+  app.get("/order/", isAuthenticated, function(req, res) {
     res.render('order', { user: req.user });
-  });
-
-  app.get("/api/order/:id", function(request, response) {
-    db.Order
-      .findAll({
-        where: {
-          orderId: request.params.id
-        }
-      })
-      .then(function(orders) {
-        response.json(orders);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        response.send(err);
-      });
   });
    
 //create order from cart
-  app.post("/order/", function(request, response) {
+  app.post("/order/", isAuthenticated, function(request, response) {
     var orderNum;
     var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
@@ -144,8 +128,6 @@ Functions-------------------------------------
 	          }
 	          //place the order through Stripe
 	          placeOrder(cartItems);
-	          //clear the items from the cart
-          	clearCartContents();
 
           }
         })
@@ -163,7 +145,8 @@ Functions-------------------------------------
         }
       })
       .then(function(result) {
-        response.send("Done--Clearing Cart");
+        // response.send("Done--Clearing Cart");
+        response.render('success', {user: req.user});
       })
       .catch(function(err) {
         console.log(err.message);
@@ -182,11 +165,12 @@ Functions-------------------------------------
 	      console.log("price " + data[i].Product.price);
 	    }
 
-	    
 	    // Authorize CC
+      // card declined 4000000000000002  
+      // card accepted 4242424242424242
 	    var stripeToken = stripe.tokens.create({
 	      card: {
-	        "number": '4242424242424242',
+	        "number": request.body.ccNum,
 	        "exp_month": 12,
 	        "exp_year": 2018,
 	        "cvc": '123'
@@ -204,15 +188,18 @@ Functions-------------------------------------
 	        }, function(err, charge) {
 	          if(err){
 	            console.log(err);
+              response.render('fail', {user: req.user});
 	          } else {
 	            console.log(charge);
+              // clear the items from the cart
+              clearCartContents();
 	          }
 	        });
 	      }
 	    });
-	    //TODO If fails do something else here - what happens in the charge response if it fails? 
     }
   });
+
   // show order by order id
   app.get("/order/:id", function(request, response) {
     db.Order
