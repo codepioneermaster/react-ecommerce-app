@@ -7,7 +7,17 @@
           <h2>{{product.name}}</h2>
           <p class="price">${{product.price}}</p>
           <p>{{product.desc}}</p>
-          <p><a href="/cart/{{id}}" class="btn btn-primary" role="button">Add To Cart</a></p>
+          <form method="POST" action="../cart/{{id}}">
+            <label for="quantity">Select quantity</label>
+            <select class="form-control" id="quantity" name="quantity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            <button class="btn btn-default" type="submit" value="Submit">Add To Cart</button>
+          </form>
         </div>
       </div>
     </div>
