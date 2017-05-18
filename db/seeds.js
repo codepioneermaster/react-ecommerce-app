@@ -46,7 +46,7 @@ module.exports = {
 								{
 									name: "Kisses: 1lb Bag",
 									price: 13.5,
-									img: "https://media.webcollage.net/rwvfp/wc/cp/13337047/module/hersheys/_cp/products/1384983799220/tab-c833bb7c-3977-4226-846d-4929f7930b41/3fddc582-fe2d-4513-8b7b-45178cab6fe2.jpg.w480.jpg",
+									img: "https://images-na.ssl-images-amazon.com/images/I/61JudlWjJDL._AC_US436_QL65_.jpg",
 									desc: "An American Classic, Hershey KISSES are bite-sized PIECES of chocolate with a unique shape and wrapped in colorful foil.",
 									quantity: 100,
 									CategoryId: 1
@@ -94,7 +94,7 @@ module.exports = {
 								{ 
 									name: "Jawbreakers: 1lb Bag",
 									price: 13.75,
-									img: "https://",
+									img: "https://images-na.ssl-images-amazon.com/images/I/61SS7N8hC1L._AC_US320_FMwebp_QL65_.jpg",
 									desc: "Longlasting, multiple layered candy balls",
 									quantity: 200,
 									CategoryId: 2
@@ -111,7 +111,7 @@ module.exports = {
 									name: "Dubble Bubble Gum - 180 Pieces",
 									price: 14,
 									img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQidRDqlsb6e3X36Wzq29GDdn4EDVcR58-fmMbODtcZ377KcHF8yv-C3i2b-3sZyrWdVoaKb4DR&usqp=CAE",
-									desc: "Gum",
+									desc: "Chewing gum, designed to freshen breath and to be inflated out of the mouth as a bubble",
 									quantity: 100,
 									CategoryId: 4
 								},
