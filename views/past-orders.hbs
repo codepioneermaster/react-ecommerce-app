@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">View Past Orders</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Purchase Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each orders}}
+          <tr>
+            <td><a href="/products/{{Product.id}}>{{Product.name}}</a></td>
+            <td>{{Product.quantity}}</td>
+            <td>{{Product.price}}</td>
+            <td>{{Product.createdAt}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

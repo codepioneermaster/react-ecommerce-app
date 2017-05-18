@@ -1,90 +1,95 @@
-<form method="POST" action="/order/">
-  <h2>Shipping Information</h2>
-  <label for="shipping-name">Name</label>
-  <input name="shippingName" id="shipping-name">
-  <label for="shipping-address">Address</label>
-  <input name="shippingAddress" id="shipping-address">
-  <label for="shipping-city">City</label>
-  <input name="shippingCity" id="shipping-city">
-  <label for="shipping-state">State</label>
-  <input name="shippingState" id="shipping-state">
-  <label for="shipping-zip">Zip Code</label>
-  <input name="shippingZip" id="shipping-zip">
-  <label for="shipping-country">Country</label>
-  <input name="shippingCountry" id="shipping-country">
-  <label for="shipping-phone">Phone</label>
-  <input name="shippingPhone" id="shipping-phone">
-
-  <hr/>
-   
-  <h2>Billing Information</h2>
-  <label for="billing-name">Name</label>
-  <input name="billingName" id="billing-name">
-  <label for="billing-address">Address</label>
-  <input name="billingAddress" id="billing-address">
-  <label for="billing-city">City</label>
-  <input name="billingCity" id="billing-city">
-  <label for="billing-state">State</label>
-  <input name="billingState" id="billing-state">
-  <label for="billing-zip">Zip Code</label>
-  <input name="billingZip" id="billing-zip">
-  <label for="billing-country">Country</label>
-  <input name="billingCountry" id="billing-country">
-  <label for="billing-phone">Phone</label>
-  <input name="billingPhone" id="billing-phone">
-
-  <hr/>
-
-  <h2>Credit Card Information</h2>
-  <label for="credit-card-num">Credit Card Num</label>
-  <input name="ccNum" id="create-card-num">
-   
-  <input type="submit" value="Submit">
-</form>
-
-<p>Back to <a href="/cart">Shopping Cart</a></p>
- 
 <div class="container">
-  <div class="row">
-  <h1>Review Order</h1>
-    <div class="col-md-6">
-      
-      <h2> Order Number #: {{orders.0.orderId}}</h2>
-      {{#each orders}}
-      <h3>{{Product.name}}</h3>
-      <p>Quantity: {{quantity}}<br>
-      Price: {{purchasePrice}}</p>
-      {{/each}}
-      <p>Total Cost: <span class="total"></span></p>
+  <form method="POST" action="/order/">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Shipping Information</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="shipping-name">Name</label>
+              <input name="shippingName" class="form-control" id="shipping-name">
+            </div>
+            <div class="form-group">
+              <label for="shipping-address">Address</label>
+              <input name="shippingAddress" class="form-control" id="shipping-address">
+            </div>
+            <div class="form-group">
+              <label for="shipping-city">City</label>
+              <input name="shippingCity" class="form-control"id="shipping-city">
+            </div>
+            <div class="form-group">
+              <label for="shipping-state">State</label>
+              <input name="shippingState" class="form-control"id="shipping-state">
+            </div>
+            <div class="form-group">
+              <label for="shipping-zip">Zip Code</label>
+              <input name="shippingZip" class="form-control" id="shipping-zip">
+            </div>
+            <div class="form-group">
+              <label for="shipping-country">Country</label>
+              <input name="shippingCountry" class="form-control" id="shipping-country">
+            </div>
+            <div class="form-group">
+              <label for="shipping-phone">Phone</label>
+              <input name="shippingPhone" class="form-control" id="shipping-phone">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Billing Information</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="billing-name">Name</label>
+              <input name="billingName" class="form-control" id="billing-name">
+            </div>
+            <div class="form-group">
+              <label for="billing-address">Address</label>
+              <input name="billingAddress" class="form-control" id="billing-address">
+            </div>
+            <div class="form-group">
+              <label for="billing-city">City</label>
+              <input name="billingCity" class="form-control" id="billing-city">
+            </div>
+            <div class="form-group">
+              <label for="billing-state">State</label>
+              <input name="billingState" class="form-control" id="billing-state">
+            </div>
+            <div class="form-group">
+              <label for="billing-zip">Zip Code</label>
+              <input name="billingZip" class="form-control" id="billing-zip">
+            </div>
+            <div class="form-group">
+              <label for="billing-country">Country</label>
+              <input name="billingCountry" class="form-control" id="billing-country">
+            </div>
+            <div class="form-group">
+              <label for="billing-phone">Phone</label>
+              <input name="billingPhone" class="form-control" id="billing-phone">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Credit Card Information</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="credit-card-num">Credit Card Num</label>
+              <input name="ccNum" class="form-control" id="create-card-num">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h2>Shipping Address</h2>
-      <h3>{{orders.0.Shipping.shippingName}}</h3>
-      
-      <p>{{orders.0.Shipping.shippingAddress}}<br/>
-        {{orders.0.Shipping.shippingCity}}, {{orders.0.Shipping.shippingState}} {{orders.0.Shipping.shippingZip}} <br/>
-        {{orders.0.Shipping.shippingCountry}} <br/>
-      Phone: {{orders.0.Shipping.shippingPhone}} </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      
-    </div>
-  </div>
+  </form>
+  <p>Back to <a href="/cart">Shopping Cart</a></p>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-
-  $.get("../api/order/" + {{orders.0.orderId}}, function(data){
-    console.log(data);
-    var total = 0;
-    for (i=0; i < data.length; i++){
-      total += data[i].quantity * data[i].purchasePrice;
-      console.log (total);
-    }
-
-    $('.total').text(total);
-  });
-</script>

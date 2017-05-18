@@ -25,7 +25,8 @@
         {{#each this}}
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail">
-            <img src="{{img}}">
+            <a href="/products/{{id}}">
+              <img alt="{{name}}" src="{{img}}"></a>
             <div class="caption">
               <h3>{{name}}</h3>
               <p class="price">${{price}}</p>
