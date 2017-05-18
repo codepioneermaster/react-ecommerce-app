@@ -16,14 +16,19 @@ function router(app) {
   app.get('/users/:id', isAuthenticated, function(request, res) {
     db.User.findOne({
       where: {
-        id: reqest.params.id
+        id: request.params.id
       }
-    }).then(function(user) {
-      res.render('user-update', { user, user: req.user });
+    }).then(function(userInfo) {
+      res.render('user-update', { userInfo, user: request.user });
     }).catch(function(err) {
         console.log(err.message);
         res.send(err);
     });
+  });
+
+  // view account/update form for current user 
+  app.get('/account', isAuthenticated, function(request, res) {
+    res.render('user-update', { userInfo: request.user, user: request.user });
   });
 
   // create new user - might change once we figure out authentication 
