@@ -196,7 +196,7 @@ Functions-------------------------------------
   });
 
   // show order by order id
-  app.get("/order/:id", function(request, response) {
+  app.get("/order/:id", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
         where: {
