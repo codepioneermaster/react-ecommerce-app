@@ -39,5 +39,5 @@ jspm_packages
 # mysql local password
 mysql-password.js
 
-# stripe api key
-stripe-key.js
+# stripe api key - including/pushing api key for class demo
+# stripe-key.js 
