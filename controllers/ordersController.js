@@ -15,7 +15,8 @@ function router(app) {
         include: [db.Product, db.Shipping, db.Billing]
       })
       .then(function(orderItems) {
-        response.json(orderItems);
+        response.render('past-orders', {orders:orderItems, user: request.user});
+        // response.json(orderItems);
       })
       .catch(function(err) {
         console.log(err.message);
