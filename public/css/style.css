@@ -1,0 +1,9 @@
+/* Products */
+.product-dropdown {
+	margin: 0 0 15px 0;
+	max-width: 60px;
+}
+
+.thumbnail img {
+	max-height: 150px;
+}

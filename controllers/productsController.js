@@ -28,7 +28,7 @@ function router(app) {
         id: req.params.id
       }
     }).then(function(product) {
-      res.render('product', { product, user: req.user });
+      res.render('product', { product, user: req.user, id: req.params.id });
     })
   })
 
