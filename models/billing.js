@@ -7,24 +7,35 @@ module.exports = function(sequelize, DataTypes) {
       },
       billingName: {
          type: DataTypes.STRING,
+         allowNull: false
       },
       billingAddress: {
          type: DataTypes.STRING,
+         allowNull: false
       },
       billingCity: {
          type: DataTypes.STRING,
+         allowNull: false
       },
       billingState: {
          type: DataTypes.STRING,
+         allowNull: false
       },
       billingZip: {
          type: DataTypes.INTEGER,
+         allowNull: false,
+         validate: {
+            len: [5]
+         }
       },
       billingCountry: {
          type: DataTypes.STRING,
       },
       billingPhone: {
          type: DataTypes.STRING,
+         validate: {
+            len: [0,10]
+         }
       }
 
 		},

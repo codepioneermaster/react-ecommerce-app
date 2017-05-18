@@ -13,8 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       purchasePrice: {
    		  type: DataTypes.DECIMAL(10,2),
-        allowNull: false,
-        validate: {}
+        allowNull: false
       },
       ccLast4: {
          type: DataTypes.INTEGER,
@@ -26,7 +25,6 @@ module.exports = function(sequelize, DataTypes) {
                 associate: function(models) {
                     Order.belongsTo(models.Product);
                     Order.belongsTo(models.User);
-                    
                     Order.belongsTo(models.Billing, {
                         foreignKey: {
                             allowNull: false,

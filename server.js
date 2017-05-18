@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser');
 var passport = require('./config/passport.js');
 
 // set up port 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8880;
 
 //require models for syncing
 var db = require('./models');

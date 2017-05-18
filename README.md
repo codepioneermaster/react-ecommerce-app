@@ -63,7 +63,7 @@ the user to a page where he/she can enter his/her shipping and billing informati
 Currently, our app is in test mode. No real credit card payments will be processed.
 If you would like to test the credit card processing functionality, please use
 the test credit card numbers "4242424242424242" for a successful credit card payment
-and "42424242424242421" for a declined credit card payment.
+and "4000000000000002" for a declined credit card payment.
 
 Depending on whether the payment was processed successfully or not, the user will
 be redirected to a success or failure page. The user can then click "Return to Products"
