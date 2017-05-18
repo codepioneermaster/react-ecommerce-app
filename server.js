@@ -17,6 +17,7 @@ var PORT = process.env.PORT || 8080;
 var db = require('./models');
 // set up express to handle data parsing and HTTP requests
 var app = express();
+
 app.use('/public', express.static(path.join(__dirname, './public')));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -35,8 +36,26 @@ app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
   layoutsDir: './views/layouts',
-  partialsDir: './views/partials'
+  partialsDir: './views/partials',
+  helpers: {
+        grouped_each: function(every, context, options) {
+			    var out = "", subcontext = [], i;
+			    if (context && context.length > 0) {
+			        for (i = 0; i < context.length; i++) {
+			            if (i > 0 && i % every === 0) {
+			                out += options.fn(subcontext);
+			                subcontext = [];
+			            }
+			            subcontext.push(context[i]);
+			        }
+			        out += options.fn(subcontext);
+			    }
+			    return out;
+			}
+    }
 }));
+
+
 app.set('view engine', '.hbs');
 
 // import routes for controllers
