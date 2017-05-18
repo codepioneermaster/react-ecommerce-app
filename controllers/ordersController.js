@@ -1,16 +1,18 @@
 var db = require("../models");
+var stripe = require('../config/stripe.js');
+var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // ROUTES
 function router(app) {
   // show all orders
-  app.get("/orders", function(request, response) {
-    db.Order.findAll({}).then(function(orders) {
+  app.get("/orders", isAuthenticated, function(request, response) {
+    db.Cart.findAll({}).then(function(orders) {
       response.json(orders);
     });
   });
 
   // show order by user id
-  app.get("/orders/user/:id", function(request, response) {
+  app.get("/orders/user/:id", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
         where: {
@@ -27,37 +29,15 @@ function router(app) {
       });
   });
 
-  // show order by order id
-  app.get("/order/:id", function(request, response) {
-    db.Order
-      .findAll({
-        where: {
-          orderId: request.params.id
-        },
-        include: [db.Product, db.Shipping, db.Billing]
-      })
-      .then(function(orderItems) {
-        response.json(orderItems);
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        response.send(err);
-      });
+  app.get("/order/", isAuthenticated, function(req, res) {
+    res.render('order', { user: req.user });
   });
-
-  //create order from cart TODO
-  app.post("/order/create/", function(request, response) {
+   
+//create order from cart
+  app.post("/order/", isAuthenticated, function(request, response) {
     var orderNum;
-    var authenticatedUser = request.body.authenticatedUser
+    var authenticatedUser = request.user.id;
     var ccLast4 = request.body.ccNum.slice(-4);
-
-    console.log("AUTH USER" + authenticatedUser)
-
-    //Authorize CC
-    //If fails do something else here
-
-    //Need to check if cart has contents
-    //Need to handle total price
 
     getNewOrderId(function(id) {
       orderNum = id + 1;
@@ -128,22 +108,28 @@ Functions-------------------------------------
           include: [db.Product]
         })
         .then(function(cartItems) {
-          for (var i = 0; i < cartItems.length; i++) {
+        	//if there is something in the users shopping cart
+        	if (cartItems.length > 0) {
+            //create order from cart items  	
+	          for (var i = 0; i < cartItems.length; i++) {
 
-            db.Order
-              .create({
-                orderId: orderNum,
-                quantity: cartItems[i].quantity,
-                purchasePrice: cartItems[i].Product.price,
-                ccLast4: ccLast4, //DO THIS
-                BillingId: orderNum,
-                ProductId: cartItems[i].Product.id,
-                UserId: authenticatedUser, 
-                ShippingId: orderNum
-              })
-              .then(function(orders) {});
+	            db.Order
+	              .create({
+	                orderId: orderNum,
+	                quantity: cartItems[i].quantity,
+	                purchasePrice: cartItems[i].Product.price,
+	                ccLast4: ccLast4, 
+	                BillingId: orderNum,
+	                ProductId: cartItems[i].Product.id,
+	                UserId: authenticatedUser, 
+	                ShippingId: orderNum
+	              })
+	              .then(function(orders) {});
+	          }
+	          //place the order through Stripe
+	          placeOrder(cartItems);
+
           }
-          clearCartContents();
         })
         .catch(function(err) {
           console.log(err.message);
@@ -159,14 +145,79 @@ Functions-------------------------------------
         }
       })
       .then(function(result) {
-        response.send("Done--Clearing Cart");
+        // response.send("Done--Clearing Cart");
+        response.render('success', {user: req.user});
       })
       .catch(function(err) {
         console.log(err.message);
         response.send(err);
       });
     }
+
+    function placeOrder(data){
+    	var total = 0;
+	    
+	    // calculate total cost of cart items
+	    for (i=0; i < data.length; i++){
+	      total += data[i].quantity * data[i].Product.price;
+	      console.log ("Total is" + total);
+	      console.log("quantity " + data[i].quantity);
+	      console.log("price " + data[i].Product.price);
+	    }
+
+	    // Authorize CC
+      // card declined 4000000000000002  
+      // card accepted 4242424242424242
+	    var stripeToken = stripe.tokens.create({
+	      card: {
+	        "number": request.body.ccNum,
+	        "exp_month": 12,
+	        "exp_year": 2018,
+	        "cvc": '123'
+	      }
+	    }, function(err, token) {
+	      if (err) {
+	        console.log(err);
+	        // asynchronously called
+	      } else {
+	        stripe.charges.create({
+	            amount: (total*100).toFixed(0), //in lowest currency unit
+	            currency: "usd",
+	            description: "Example charge",
+	            source: token.id,
+	        }, function(err, charge) {
+	          if(err){
+	            console.log(err);
+              response.render('fail', {user: req.user});
+	          } else {
+	            console.log(charge);
+              // clear the items from the cart
+              clearCartContents();
+	          }
+	        });
+	      }
+	    });
+    }
   });
+
+  // show order by order id
+  app.get("/order/:id", function(request, response) {
+    db.Order
+      .findAll({
+        where: {
+          orderId: request.params.id
+        },
+        include: [db.Product, db.Shipping, db.Billing]
+      })
+      .then(function(orderItems) {
+        response.json(orderItems);
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+  });
+
 }
 
 module.exports = router;

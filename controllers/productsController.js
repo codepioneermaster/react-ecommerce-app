@@ -1,24 +1,36 @@
 // import model
 var db = require('../models');
+var isAdmin = require('../config/middleware/isAdmin.js');
+var isAuthenticated = require('../config/middleware/isAuthenticated.js');
 
 // HTML routing
 function router(app) {
 
   // get all products
   app.get('/products', function(req, res) {
-    
-    db.Product.findAll({
-    
-    }).then(function(products) {
-      res.render('products', { products });
-
-      // res.json(products);
-      console.log(products);
-      
+    db.sequelize.Promise.all([
+      db.Product.findAll({}),
+      db.Category.findAll({})
+    ]).spread(function(products, categories) {
+      //res.json(products);
+      res.render('products', {products, categories, user: req.user});
     });
-  
-
+    // db.Product.findAll({
+    
+    // }).then(function(products) {
+    //   res.render('products', { products, user: req.user}); 
+    // });
   });
+
+  app.get('/products/:id', function(req, res) {
+    db.Product.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(product) {
+      res.render('product', { product, user: req.user });
+    })
+  })
 
   // create a product
   app.post('/products', function(req, res) {
