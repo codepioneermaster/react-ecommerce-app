@@ -123,7 +123,7 @@ Functions-------------------------------------
           where: {
             UserId: authenticatedUser
           },
-          include: [db.Product]
+          include: [db.Product, db.User]
         })
         .then(function(cartItems) {
         	//if there is something in the users shopping cart
@@ -174,7 +174,10 @@ Functions-------------------------------------
 
     function placeOrder(data){
     	var total = 0;
-	    
+      var email = data[0].dataValues.User.dataValues.email
+      var name = data[0].dataValues.User.dataValues.firstName
+      var msg = ""
+
 	    // calculate total cost of cart items
 	    for (i=0; i < data.length; i++){
 	      total += data[i].quantity * data[i].Product.price;
