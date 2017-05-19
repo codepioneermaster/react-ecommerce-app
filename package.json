@@ -31,7 +31,5 @@
     "passport-local": "^1.0.0",
     "sequelize": "^3.30.4",
     "stripe": "^4.19.0"
-  
-  
   }
 }
