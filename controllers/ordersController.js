@@ -1,6 +1,7 @@
 var db = require("../models");
 var stripe = require('../config/stripe.js');
 var isAuthenticated = require('../config/middleware/isAuthenticated.js');
+var sequelize = require('sequelize');
 
 // ROUTES
 function router(app) {
@@ -9,19 +10,48 @@ function router(app) {
   app.get("/orders", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
+        attributes: ['orderId', 'orderDate', [sequelize.fn('sum', sequelize.col('Order.purchasePrice')), 'orderTotal']],
+        group: ['Order.orderId', 'Order.orderDate'],
         where: {
           UserId: request.user.id
-        },
-        include: [db.Product, db.Shipping, db.Billing]
+        }
+        // },
+        // include: [db.Product, db.Shipping, db.Billing]
       })
-      .then(function(orderItems) {
-        response.render('past-orders', {orders:orderItems, user: request.user});
-        // response.json(orderItems);
+      .then(function(allOrders) {
+        // since total was calculated above it wasn't working to grab it from the order object directly in hbs, and had to extract it first from the data values then send to hbs: 
+        var orderData = [];
+        for(var i = 0; i < allOrders.length; i++) {
+          var order = {
+            orderId: allOrders[i].orderId,
+            orderTotal: allOrders[i].dataValues.orderTotal,
+            orderDate: allOrders[i].dataValues.orderDate
+          }
+          // why does order date parsed by js and displayed not match orderDate in db and if I console log it??
+          orderData.push(order);
+        }
+        response.render('past-orders', {orders:orderData, user: request.user});
+        // response.json(allOrders);
       })
       .catch(function(err) {
         console.log(err.message);
         response.send(err);
       });
+  });
+
+  app.get('/orders/:id', isAuthenticated, function(req, res) {
+    db.Order.findAll({
+      where: {
+        UserId: req.user.id,
+        orderId: req.params.id
+      },
+      include: [db.Product, db.Shipping, db.Billing]
+    }).then(function(orderItems) {
+      res.render('past-order', {orderItems: orderItems, user: req.user});
+    }).catch(function(err) {
+      console.log(err.message);
+      res.send(err);
+    })
   });
 
   app.get("/order/", isAuthenticated, function(req, res) {

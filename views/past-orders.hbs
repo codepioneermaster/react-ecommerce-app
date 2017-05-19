@@ -5,19 +5,17 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th>Purchase Date</th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
           {{#each orders}}
           <tr>
-            <td><a href="/products/{{Product.id}}>{{Product.name}}</a></td>
-            <td>{{Product.quantity}}</td>
-            <td>{{Product.price}}</td>
-            <td>{{Product.createdAt}}</td>
+            <td><a href="/orders/{{orderId}}">{{orderId}}</a></td>
+            <td>{{orderDate}}</td>
+            <td>{{orderTotal}}</td>
           </tr>
           {{/each}}
         </tbody>
@@ -25,3 +23,4 @@
     </div>
   </div>
 </div>
+
