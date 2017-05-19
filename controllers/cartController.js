@@ -65,7 +65,6 @@ function router(app) {
       where: {
         UserId: request.user.id,
         id: request.params.itemId,
-        quantity: request.body.quantity// bc there can be multiple cart instances of same item with different qs 
       }
     }).then(function() {
       response.redirect('/cart');
