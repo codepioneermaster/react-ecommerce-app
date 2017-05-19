@@ -1,31 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-offset-3 col-md-6">
       <h2>User Login</h2>
-      <form class="form-horizontal" method="POST" action="/login">
+      <form method="POST" action="/login">
         <div class="form-group">
           <label for="email" class="control-label col-sm-2">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" name="email" id="email" required>
-          </div>
+          <input type="email" class="form-control" name="email" id="email" required>
         </div>
         <div class="form-group">
           <label for="pwd" class="control-label col-sm-2">Password</label>
-          <div class="col-sm-10">
-            <input class="form-control" name="pwd" type="password" id="pwd" pattern="[a-zA-Z0-9]{5,}" title="Password must include at least 5 letters/numbers" required>
-          </div>
+          <input class="form-control" name="pwd" type="password" id="pwd" pattern="[a-zA-Z0-9]{5,}" title="Password must include at least 5 letters/numbers" required>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <input class="btn btn-primary" type="submit" id="login-submit" value="Submit">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-             <h4>New user? <a href="/signup">Sign up</a></h4>
-          </div>
+          <button class="btn btn-primary" type="submit" id="login-submit">Submit</button>
         </div>
       </form>
+      <p>New User? <a href="/signup">Sign up</a></p>
     </div>
   </div>
 </div>
