@@ -6,16 +6,18 @@
         <thead>
           <tr>
             <th>Order Number</th>
-            <th>Order Date</th>
+            <th>Order Placed</th>
             <th>Total</th>
+            <th>Products</th>
           </tr>
         </thead>
         <tbody>
           {{#each orders}}
           <tr>
             <td><a href="/orders/{{orderId}}">{{orderId}}</a></td>
-            <td>{{orderDate}}</td>
-            <td>{{orderTotal}}</td>
+            <td>{{dataValues.formattedDate}}</td>
+            <td>{{dataValues.orderTotal}}</td>
+            <td>{{dataValues.itemCount}}</td>
           </tr>
           {{/each}}
         </tbody>

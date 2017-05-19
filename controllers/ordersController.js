@@ -10,8 +10,12 @@ function router(app) {
   app.get("/orders", isAuthenticated, function(request, response) {
     db.Order
       .findAll({
-        attributes: ['orderId', 'orderDate', [sequelize.fn('sum', sequelize.col('Order.purchasePrice')), 'orderTotal']],
-        group: ['Order.orderId', 'Order.orderDate'],
+        // calculate total from purchase prices
+        // format date from createdAt
+        // count number of items in order
+        attributes: ['orderId', [sequelize.fn('sum', sequelize.col('Order.purchasePrice')), 'orderTotal'],[sequelize.fn('date_format', sequelize.col('Order.createdAt'), '%m-%d-%y'), 'formattedDate'], [sequelize.fn('count', sequelize.col('Order.quantity')), 'itemCount']],
+        // group results
+        group: ['Order.orderId','formattedDate'],
         where: {
           UserId: request.user.id
         }
@@ -19,18 +23,7 @@ function router(app) {
         // include: [db.Product, db.Shipping, db.Billing]
       })
       .then(function(allOrders) {
-        // since total was calculated above it wasn't working to grab it from the order object directly in hbs, and had to extract it first from the data values then send to hbs: 
-        var orderData = [];
-        for(var i = 0; i < allOrders.length; i++) {
-          var order = {
-            orderId: allOrders[i].orderId,
-            orderTotal: allOrders[i].dataValues.orderTotal,
-            orderDate: allOrders[i].dataValues.orderDate
-          }
-          // why does order date parsed by js and displayed not match orderDate in db and if I console log it??
-          orderData.push(order);
-        }
-        response.render('past-orders', {orders:orderData, user: request.user});
+        response.render('past-orders', {orders:allOrders, user: request.user});
         // response.json(allOrders);
       })
       .catch(function(err) {

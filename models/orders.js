@@ -17,10 +17,6 @@ module.exports = function(sequelize, DataTypes) {
       },
       ccLast4: {
          type: DataTypes.INTEGER,
-      },
-      orderDate: {
-        type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.NOW
       }
 
 		},
