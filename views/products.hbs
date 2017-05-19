@@ -1,15 +1,14 @@
 <div class="container">
   <div class="row">
-
     <div class="col-md-3">
       <div class="panel panel-default">
         <div class="panel-heading">View By Category</div>
         <div class="panel-body">
-          <div class="list-group">
+          <div class="list-group text-center">
             {{#each categories}}
             <form method="post" action="/products/category/{{name}}">
               <input type="hidden" name="categoryId" value="{{id}}">
-              <button class="btn btn-default" type="submit" value="Submit">
+              <button class="btn btn-default btn-block" type="submit" value="Submit">
               {{name}}
               </button>
             </form>
@@ -18,7 +17,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-9">
     {{#grouped_each 3 products}}
       <div class="row">
@@ -27,12 +25,11 @@
           <div class="thumbnail">
             <a href="/products/{{id}}">
               <img alt="{{name}}" src="{{img}}"></a>
-            <div class="caption">
+              <div class="caption">
               <h3>{{name}}</h3>
               <p class="price">${{price}}</p>
-              <p><a href="/products/{{id}}" class="btn btn-primary" role="button">View Product</a> 
               <form method="POST" action="/cart/{{id}}">
-                <label for="quantity">Select quantity</label>
+              <label for="quantity">Select quantity</label>
                 <select class="form-control product-dropdown" id="quantity" name="quantity">
                   <option>1</option>
                   <option>2</option>
@@ -40,8 +37,9 @@
                   <option>4</option>
                   <option>5</option>
                 </select>
-                <button class="btn btn-default" type="submit" value="Submit">Add To Cart</button>
-              </form>
+                <button class="btn btn-default noPad" type="submit" value="Submit">Add To Cart</button>
+                </form>
+              <p><a href="/products/{{id}}" class="btn btn-primary btn-block" role="button">View Product</a>
             </div>
           </div>
         </div>
@@ -50,7 +48,6 @@
     {{/grouped_each}}
     </div>
   </div>
-  
 </div>
 
 
