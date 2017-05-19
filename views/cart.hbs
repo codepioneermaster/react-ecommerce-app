@@ -5,7 +5,7 @@
     </div>
   </div>
   
-    {{#each cartItems}}
+  {{#each cartItems}}
   <div class="row">  
     
     <div class="col-md-12">
@@ -44,11 +44,17 @@
         <div class="col-md-3"></div>
       </div>
     </div>
-    
+    {{else}}
+    <p>You have no items in your cart</p>
     {{/each}}
+
     <div class="row">
-    <a href="/order" class="btn btn-primary">Checkout</a>
-  </div>
+    {{#if cartItems}}
+      <a href="/order" class="btn btn-primary">Checkout</a>
+    {{else}}
+      <a href="/products" class="btn btn-primary">Shop</a>
+    {{/if}}
+    </div>
   </div>
   
 </div>
