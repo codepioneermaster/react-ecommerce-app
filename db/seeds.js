@@ -28,15 +28,15 @@ module.exports = {
 						db.Product
 							.bulkCreate([
 								{
-									name: "Dark Chocolate Truffles: 1lb Bag",
-									price: 15.5,
+									name: "Truffles",
+									price: 15.50,
 									img: "https://www.candywarehouse.com/assets/item/regular/french-mint-filled-dark-chocolate-truffles.jpg",
 									desc: "Succulent morsels of decadent dark chocolate with exquisite truffle fillings",
 									quantity: 145,
 									CategoryId: 1
 								},
 								{ 
-									name: "Haribo Pico-Balla",
+									name: "Pico-Balla",
 									price: 5.19,
 									img: "https://images-na.ssl-images-amazon.com/images/I/613pCvZqzDL.jpg",
 									desc: "Great and tasty Gummy candiesThis lot contains one pack. Free shipping worldwide. Package weight is 175g",
@@ -44,15 +44,15 @@ module.exports = {
 									CategoryId: 5
 								},
 								{
-									name: "Kisses: 1lb Bag",
-									price: 13.5,
+									name: "Kisses",
+									price: 13.50,
 									img: "https://images-na.ssl-images-amazon.com/images/I/61JudlWjJDL._AC_US436_QL65_.jpg",
 									desc: "An American Classic, Hershey KISSES are bite-sized PIECES of chocolate with a unique shape and wrapped in colorful foil.",
 									quantity: 100,
 									CategoryId: 1
 								},
 								{ 
-									name: "Haribo Baerchen Paerchen Sour and Sweet",
+									name: "Baerchen",
 									price: 4.77,
 									img: "https://images-na.ssl-images-amazon.com/images/I/911Jj5qqvLL._SX522_.jpg",
 									desc: "Imported from Germany",
@@ -60,7 +60,7 @@ module.exports = {
 									CategoryId: 5
 								},
 								{
-									name: "Gummy Bears: 2lb Bag",
+									name: "Gummy Bears",
 									price: 24.99,
 									img: "https://s3.amazonaws.com/kidzworld_photo/images/2016323/5b89be7a-ff3c-45c6-a065-aec7839c9e97/gummybears-inarow.jpg",
 									desc: "An American Classic, Hershey KISSES are bite-sized PIECES of chocolate with a unique shape and wrapped in colorful foil.",
@@ -68,7 +68,7 @@ module.exports = {
 									CategoryId: 3
 								},
 								{ 
-									name: "Gummy Worms: 2lb Bag",
+									name: "Gummy Worms",
 									price: 24.99,
 									img: "https://nuts.com/images/auto/510x340/assets/a5ffff18e31d4576.jpg",
 									desc: "Fat free candy worms made with real fruit juice and colors from natural sources",
@@ -76,7 +76,7 @@ module.exports = {
 									CategoryId: 3
 								},
 								{ 
-									name: "Haribo Weinland Gummi Candy",
+									name: "Weinland",
 									price: 4.58,
 									img: "https://images-na.ssl-images-amazon.com/images/I/91W6D8gGNWL._SY679_.jpg",
 									desc: "Haribo Weinland Weingummi, 1er Pack (1 x 200 g Beutel)",
@@ -84,15 +84,15 @@ module.exports = {
 									CategoryId: 5
 								},
 								{ 
-									name: "Peanut Nougat: 1lb Bag",
+									name: "Peanut Nougat",
 									price: 13.99,
-									img: "https://",
+									img: "https://i0.wp.com/kitchensanctuary.com/wp-content/uploads/2015/10/Chocolate-peanut-nougat-square-2.jpg",
 									desc: "Rich, creamy whipped nougat with peanut bits",
 									quantity: 245,
 									CategoryId: 1
 								},
 								{ 
-									name: "Jawbreakers: 1lb Bag",
+									name: "Jawbreakers",
 									price: 13.75,
 									img: "https://images-na.ssl-images-amazon.com/images/I/61SS7N8hC1L._AC_US320_FMwebp_QL65_.jpg",
 									desc: "Longlasting, multiple layered candy balls",
@@ -100,7 +100,7 @@ module.exports = {
 									CategoryId: 2
 								},
 								{ 
-									name: "Haribo Little Cupcakes",
+									name: "Little Cupcakes",
 									price: 6.09,
 									img: "https://images-na.ssl-images-amazon.com/images/I/71vZb6hftAL._SX522_.jpg",
 									desc: "imported from Germany - Not available in US-Stores Original Germany Haribo sweets175g/6.17oz",
@@ -108,7 +108,7 @@ module.exports = {
 									CategoryId: 5
 								},
 								{ 
-									name: "Dubble Bubble Gum - 180 Pieces",
+									name: "Dubble Bubble Gum",
 									price: 14,
 									img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQidRDqlsb6e3X36Wzq29GDdn4EDVcR58-fmMbODtcZ377KcHF8yv-C3i2b-3sZyrWdVoaKb4DR&usqp=CAE",
 									desc: "Chewing gum, designed to freshen breath and to be inflated out of the mouth as a bubble",
@@ -116,7 +116,7 @@ module.exports = {
 									CategoryId: 4
 								},
 								{ 
-									name: "Haribo Gummi Candy - Fizzy Cola",
+									name: "Fizzy Cola",
 									price: 5.76,
 									img: "https://images-na.ssl-images-amazon.com/images/I/9168m9gMN1L._SX522SX522_SY628_CR,0,0,522,628_PIbundle-12,TopRight,0,0_SX522_SY628_CR,0,0,522,628_SH20_.jpg",
 									desc: "Happy-Cola gummies with sour, sweet, and tangy coating",
@@ -124,7 +124,7 @@ module.exports = {
 									CategoryId: 5
 								},
 								{ 
-									name: "Haribo Saure Pommes Gummi Candy",
+									name: "Saure Pommes",
 									price: 5.56,
 									img: "https://images-na.ssl-images-amazon.com/images/I/91ze9qBQDRL._SY679_.jpg",
 									desc: "Haribo Saure Pommes Gummi Candy 200 g",
