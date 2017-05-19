@@ -9,7 +9,7 @@ function router(app) {
   // get all products
   app.get('/products', function(req, res) {
     db.sequelize.Promise.all([
-      db.Product.findAll({}),
+      db.Product.findAll({limit: 6}),
       db.Category.findAll({})
     ]).spread(function(products, categories) {
       //res.json(products);
