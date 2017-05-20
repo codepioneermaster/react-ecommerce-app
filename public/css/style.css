@@ -1,10 +1,77 @@
-/* Products */
-.product-dropdown {
+/* Nav */
+nav.navbar.navbar-default {
+    background: #337ab7;
 }
 
-.btn{
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:focus, .navbar-default .navbar-nav>li>a   {
+    color:#fff;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover{
+    color: #e8e8e8;
+}
+
+
+/* Products */
+.menu .panel-heading, .menu .btn:hover, .back-to-products {
+  background-color: #337ab7;
+  color: #fff;
+}
+
+.col-md-9.main {
+  display: -webkit-box;:
+  -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  max-width: none;
+  padding: 0;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+.main .product {
+  height: auto;
+  align-items: stretch;
+  display: -webkit-box;
+}
+
+.product-dropdown {
+  margin-bottom: 15px;
+  width: 55px;
+}
+
+.product .thumbnail {
+  width: 100%;
+  position: relative;
+}
+
+.product .thumbnail .caption {
+  padding-bottom: 60px;
+}
+
+.product .thumbnail .btn.view-product {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  left: 10px;
+  width: auto;
+}
+
+.btn.back-to-products:hover, .btn.back-to-products:active, .btn.back-to-products:focus {
+  background-color: #286090;
+  border-color: #204d74;
+  color: #fff;
+}
+
+.btn {
 	margin-top: 10px;
 }
+
 .cartBox{
 	/*border: 1px solid #ddd;*/
 	border: 1px solid black;
