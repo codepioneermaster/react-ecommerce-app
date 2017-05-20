@@ -64,8 +64,7 @@ function router(app) {
     db.Cart.destroy({
       where: {
         UserId: request.user.id,
-        ProductId: request.params.itemId,
-        quantity: request.body.quantity // bc there can be multiple cart instances of same item with different qs 
+        id: request.params.itemId,
       }
     }).then(function() {
       response.redirect('/cart');

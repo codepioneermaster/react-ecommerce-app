@@ -29,7 +29,7 @@ module.exports = {
 							.bulkCreate([
 								{
 									name: "Truffles",
-									price: 15.50,
+									price: 15.59,
 									img: "https://www.candywarehouse.com/assets/item/regular/french-mint-filled-dark-chocolate-truffles.jpg",
 									desc: "Succulent morsels of decadent dark chocolate with exquisite truffle fillings",
 									quantity: 145,
@@ -45,7 +45,7 @@ module.exports = {
 								},
 								{
 									name: "Kisses",
-									price: 13.50,
+									price: 13.59,
 									img: "https://images-na.ssl-images-amazon.com/images/I/61JudlWjJDL._AC_US436_QL65_.jpg",
 									desc: "An American Classic, Hershey KISSES are bite-sized PIECES of chocolate with a unique shape and wrapped in colorful foil.",
 									quantity: 100,
