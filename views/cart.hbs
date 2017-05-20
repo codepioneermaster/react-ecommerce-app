@@ -8,16 +8,16 @@
   {{#if cartItems}}
    
   {{#grouped_each 4 cartItems}}
-  <div class="row">  
+  <div class="row cart-row">  
     {{#each this}}
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-6 product">
       <div class="thumbnail">
         <img src="{{Product.img}}" alt="{{Product.name}}">
         </a>
         <div class="caption">
           <h3>{{Product.name}}</h3>
           <p class="price">${{Product.price}}</p>
-          <form class="form-inline" method="POST" action="/cart/{{Product.id}}/?_method=PUT">
+          <form method="POST" action="/cart/{{Product.id}}/?_method=PUT">
             <input type="hidden" value={{Product.id}} name="itemId">
             <div class="form-group">
               <label for="quantity">Qty</label>
@@ -32,7 +32,7 @@
               <button class="btn btn-default noPad" type="submit" value="Submit">Update Quantity</button>
             </div>
           </form>
-          <form class="form-inline" method="POST" action="/cart/{{Product.id}}?_method=DELETE">
+          <form method="POST" action="/cart/{{Product.id}}?_method=DELETE">
             <div class="form-group">
               <div class="btn-group">
                 <a href="/products/{{Product.id}}" class="btn btn-primary" role="button">View</a> 

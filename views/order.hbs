@@ -42,6 +42,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Billing Information</h3>
+            <input type="checkbox" onclick="setBilling(this.checked);"/> Same as Shipping
           </div>
           <div class="panel-body">
             <div class="form-group">
@@ -93,3 +94,17 @@
   </form>
   <p>Back to <a href="/cart">Shopping Cart</a></p>
 </div>
+
+<script type="text/javascript">
+  function setBilling(checked) {  
+          if (checked) {  
+                    document.getElementById('billing-name').value = document.getElementById('shipping-name').value; 
+                    document.getElementById('billing-address').value = document.getElementById('shipping-address').value;   
+                    document.getElementById('billing-city').value = document.getElementById('shipping-city').value;   
+                    document.getElementById('billing-state').value = document.getElementById('shipping-state').value;   
+                    document.getElementById('billing-zip').value = document.getElementById('shipping-zip').value;   
+                    document.getElementById('billing-country').value = document.getElementById('shipping-country').value;
+                    document.getElementById('billing-phone').value = document.getElementById('shipping-phone').value;   
+          }
+  }
+</script>
