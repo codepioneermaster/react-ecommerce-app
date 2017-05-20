@@ -13,6 +13,31 @@ nav.navbar.navbar-default {
 
 
 /* Products */
+
+.container .intro {
+  display: none;
+  position: absolute;
+  background: url("/public/img/intro.jpg") no-repeat center;
+  width: 950px;
+  height: 600px;
+  z-index: 1;
+  top: 15%;
+  left: 25vw;
+  border: 1px solid #ccc;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 .menu .panel-heading, .menu .btn:hover, .back-to-products {
   background-color: #337ab7;
   color: #fff;

@@ -233,8 +233,6 @@ Functions-------------------------------------
       })
       .then(function(orderItems) {
         response.json(orderItems);
-        //attempt to show order on success page
-        //response.render('success',{orders: orderItems});
       })
       .catch(function(err) {
         console.log(err.message);
