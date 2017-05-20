@@ -92,6 +92,10 @@ nav.navbar.navbar-default {
   align-items: center;
 }
 
+.order .panel-heading{
+  height: 58px;
+}
+
 @media screen and (max-width: 768px) {
     .product {
         width: 50%;

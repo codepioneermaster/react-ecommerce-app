@@ -32,6 +32,7 @@ function router(app) {
       });
   });
 
+
   app.get('/orders/:id', isAuthenticated, function(req, res) {
     db.Order.findAll({
       where: {
@@ -155,23 +156,6 @@ Functions-------------------------------------
         });
     }
 
-    function clearCartContents() {
-      db.Cart
-      .destroy({
-        where: {
-          userId: authenticatedUser 
-        }
-      })
-      .then(function(result) {
-        // response.send("Done--Clearing Cart");
-        response.render('success', {user: request.user});
-      })
-      .catch(function(err) {
-        console.log(err.message);
-        response.send(err);
-      });
-    }
-
     function placeOrder(data){
     	var total = 0;
       var email = data[0].dataValues.User.dataValues.email
@@ -219,6 +203,23 @@ Functions-------------------------------------
 	      }
 	    });
     }
+
+    function clearCartContents() {
+      db.Cart
+      .destroy({
+        where: {
+          userId: authenticatedUser 
+        }
+      })
+      .then(function(result) {
+        // response.send("Done--Clearing Cart");
+        response.render('success', {user: request.user});
+      })
+      .catch(function(err) {
+        console.log(err.message);
+        response.send(err);
+      });
+    }
   });
 
   // show order by order id
@@ -232,6 +233,8 @@ Functions-------------------------------------
       })
       .then(function(orderItems) {
         response.json(orderItems);
+        //attempt to show order on success page
+        //response.render('success',{orders: orderItems});
       })
       .catch(function(err) {
         console.log(err.message);

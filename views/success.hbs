@@ -1,9 +1,53 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2>Order successful!</h2>
+      
+      <div class="row">
+      	<h2>Order successful!</h2>
+			  <!--<h1>Review Order</h1>
+		    <div class="col-md-6">
+		      <div class="panel panel-default">
+	          <div class="panel-heading">
+	          	<h2> Order Number #: {{orders.0.orderId}}</h2>
+	          </div>
+	          <div class="panel-body">
+				      {{#each orders}}
+				      <h3>{{Product.name}}</h3>
+				      <p>Quantity: {{quantity}}<br>
+				      Price: ${{purchasePrice}}</p>
+				      {{/each}}
+				      <p>Total Cost: $<span class="total"></span></p>
+			      </div>
+			    </div>
+		    </div>
+		    <div class="col-md-6">
+		    	<div class="panel panel-default">
+	          <div class="panel-heading">
+		      		<h2>Shipping Address</h2>
+		      	</div>
+		      	<div class="panel-body">
+				      <h3>{{orders.0.Shipping.shippingName}}</h3>
+				      <p>{{orders.0.Shipping.shippingAddress}}<br/>
+				        {{orders.0.Shipping.shippingCity}}, {{orders.0.Shipping.shippingState}} {{orders.0.Shipping.shippingZip}} <br/>
+				        {{orders.0.Shipping.shippingCountry}} <br/>
+				      Phone: {{orders.0.Shipping.shippingPhone}} </p>
+			      </div>
+			    </div>
+		    </div>-->
+		  </div> 
       <a class="btn btn-default" href="/products">Return to Products</a>
       <a class="btn btn-default" href="/orders">View Orders</a>
     </div>
   </div>
 </div>
+
+<!--
+<script type="text/javascript">
+		var orders = {{{json orders}}};
+		var total = 0;
+    for (i=0; i < orders.length; i++){
+      total += orders[i].quantity * orders[i].purchasePrice;
+    }
+    document.querySelector(".total").textContent = total.toFixed(2);
+</script>
+-->
